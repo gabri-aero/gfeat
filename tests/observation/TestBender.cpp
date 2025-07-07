@@ -3,7 +3,7 @@
 #include <limits>
 #include <typeinfo>
 
-#include <great>
+#include <gfeat>
 #include <gtest/gtest.h>
 
 TEST(TestBender, BuildMatrix) {

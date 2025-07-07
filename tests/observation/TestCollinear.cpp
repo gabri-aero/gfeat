@@ -5,7 +5,7 @@
 #include <typeinfo>
 
 #include "gtest/gtest.h"
-#include <great>
+#include <gfeat>
 
 TEST(TestCollinear, BuildMatrix) {
     double I = M_PI_2;

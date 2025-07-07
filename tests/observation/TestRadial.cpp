@@ -5,7 +5,7 @@
 
 #include "gtest/gtest.h"
 
-#include <great>
+#include <gfeat>
 
 double deg2rad(double deg) { return deg * M_PI / 180.0; }
 

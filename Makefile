@@ -8,7 +8,7 @@ DATA_DIR = data
 CXX_FLAGS += -DDATA_DIR=\"$(DATA_DIR)\"
 
 # Define directories
-INCLUDE_DIR = great
+INCLUDE_DIR = gfeat
 BUILD_DIR = build
 TEST_DIR = tests
 

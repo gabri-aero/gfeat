@@ -5,7 +5,7 @@
 #include <typeinfo>
 
 #include "gtest/gtest.h"
-#include <great>
+#include <gfeat>
 
 TEST(TestConstellation, BuildMatrix) {
     int Nr = 31;
