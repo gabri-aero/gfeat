@@ -1,0 +1,6 @@
+[submodule "external/functions"]
+	path = external/functions
+	url = https://github.com/gabri-aero/functions
+[submodule "external/fft"]
+	path = external/fft
+	url = https://github.com/gabri-aero/fft
