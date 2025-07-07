@@ -8,31 +8,78 @@
 namespace py = pybind11;
 
 void init_gravity(py::module &m) {
-    auto base_functional = py::class_<BaseFunctional>(m, "BaseFunctional");
+    auto base_functional = py::class_<BaseFunctional>(m, "BaseFunctional",
+                                                      R"doc(
+            BaseFunctional is an abstract class that serves as parent class to implement 
+            different gravity field functionals. For this purpose, it contains a 
+            common_degree_factor attribute that is overloaded by the child classes. 
+
+            It is employed internally in both the Global Spherical Harmonics Synthesis 
+            and the computation of degree variances. This allows for code modularity
+            and simplifies the implementation of the different functionals.
+        )doc");
 
     auto gravity_anomaly =
-        py::class_<GravityAnomaly, BaseFunctional>(m, "GravityAnomaly");
+        py::class_<GravityAnomaly, BaseFunctional>(m, "GravityAnomaly",
+                                                   R"doc(
+            GravityAnomaly class defines the degree common terms for computation of gravity anomalies
+            (in milligals).
+
+            .. math::
+
+                f(l) = 10^5 \frac{\mu}{a_e^2} (l-1)
+            )doc");
     auto geoid_height =
-        py::class_<GeoidHeight, BaseFunctional>(m, "GeoidHeight");
+        py::class_<GeoidHeight, BaseFunctional>(m, "GeoidHeight",
+                                                R"doc(
+            GeoidHeight class defines the degree common terms for computation of geoid height.
+
+            .. math::
+
+                f(l) = a_e
+            )doc");
     auto equivalent_water_height =
         py::class_<EquivalentWaterHeight, BaseFunctional>(
             m, "EquivalentWaterHeight",
             R"doc(
-            EquivalentWaterHeight class defines the common terms for computation of EWH.
+            EquivalentWaterHeight class defines the degree common terms for computation of EWH 
+            (Wahr, 1998).
 
-            The class also includes the possibility to apply Gaussian smoothing with an
-            input smoothing radius.
+            .. math::
+
+                f(l) = \frac{a_e \rho_c W_l}{3 \rho_w} \frac{2l+1}{1+k_l'}
+
+            The class also include the possibility to apply Gaussian smoothing with an
+            input smoothing radius (Jekeli, 1981). The computation of the SH coefficients of 
+            the averaging function :math:`W_l` follows the continuous fraction approach proposed by 
+            Piretzidis (2019).
 
             Inherits from:
-                BaseFunctional
-
-            Example usage:
-                ewh = EquivalentWaterHeight(200e3)            
+                BaseFunctional        
         )doc");
 
-    gravity_anomaly.def(py::init<>());
-    geoid_height.def(py::init<>());
-    equivalent_water_height.def(py::init<double>(), R"doc(
+    gravity_anomaly.def(py::init<>(),
+                        R"doc(
+            Constructor for GravityAnomaly.
+                
+            Example
+            --------
+            Create a BaseFunctional instance for gravity anomalies
+
+                gravity_anomaly = GravityAnomaly()
+    )doc");
+    geoid_height.def(py::init<>(),
+                     R"doc(
+            Constructor for GeoidHeight.
+                
+            Example
+            --------
+            Create a BaseFunctional instance for geoid heights
+
+                geoid_height = GeoidHeight()
+    )doc");
+    equivalent_water_height.def(py::init<double>(), py::arg("smoothing_radius"),
+                                R"doc(
             Constructor for EquivalentWaterHeight.
 
             Parameters
@@ -40,6 +87,12 @@ void init_gravity(py::module &m) {
             smoothing_radius : float
                 Value at which the Gaussian spatial smoothing kernel decays to 1/2 of the 
                 initial value.
+                
+            Example
+            --------
+            Create an instance with 200 km smoothing radius::
+
+                ewh = EquivalentWaterHeight(200e3)
     )doc");
 
     auto sh = py::class_<SphericalHarmonics>(m, "SphericalHarmonics");

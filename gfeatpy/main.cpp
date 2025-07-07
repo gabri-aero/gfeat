@@ -23,8 +23,8 @@ PYBIND11_MODULE(_core, m) {
 
     // Define the planet class
     py::class_<Planet>(m, "Planet",
-                       "This global variable defines the properties of the "
-                       "central body that is under analysis")
+                       "This class defines a global variable that stores the "
+                       "properties of the central body that is under analysis")
         .def(py::init<>()) // Default constructor
         .def_readwrite("mu", &Planet::mu,
                        "Standard gravitational parameter [m³/s²]")
@@ -36,7 +36,7 @@ PYBIND11_MODULE(_core, m) {
                        "Equatorial radius, or Brillouin sphere [m]")
         .def_readwrite("rho_e", &Planet::rho_e, "Mean crustal density [kg/m³]")
         .def_readwrite("rho_w", &Planet::rho_w,
-                       "Water density at Sea Level [kg/m³]");
+                       "Water density at Sea Level for EWH [kg/m³]");
 
     // Bind the global planet instance
     m.attr("planet") = &planet;
