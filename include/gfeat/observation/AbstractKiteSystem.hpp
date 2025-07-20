@@ -229,7 +229,7 @@ public:
     double get_sigma_Slm(int l, int m) const {
         return m == 0 ? 0 : sigma_x(m - 1, l);
     }
-    auto get_degree_variance() const {
+    auto degree_variance() const {
         // Allocate degree variance vector
         Eigen::VectorXd sigma2_l(l_max + 1);
         sigma2_l.setZero();
@@ -245,6 +245,16 @@ public:
         }
         return sigma2_l;
     }
+
+    Eigen::VectorXd rms_per_coefficient_per_degree() const {
+        Eigen::VectorXd result(l_max + 1);
+        auto deg_var = this->degree_variance();
+        for (int l = 2; l <= this->l_max; l++) {
+            result(l) = std::sqrt(deg_var.coeff(l) / (2 * l + 1));
+        }
+        return result;
+    }
+
     std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd>
     synthesis(int n_lon, int n_lat, const BaseFunctional &functional) const {
         auto t1 = std::chrono::high_resolution_clock::now();

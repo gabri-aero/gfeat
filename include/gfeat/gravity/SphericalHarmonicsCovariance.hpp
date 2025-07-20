@@ -1,6 +1,7 @@
-#ifndef _SPHERICAL_HARMONICS_ERROR_HPP_
-#define _SPHERICAL_HARMONICS_ERROR_HPP_
+#ifndef _SPHERICAL_HARMONICS_COVARIANCE_HPP_
+#define _SPHERICAL_HARMONICS_COVARIANCE_HPP_
 
+#include "../utils/Logger.hpp"
 #include "../utils/Sinex.hpp"
 #include "Functionals.hpp"
 
@@ -9,7 +10,7 @@
 #include <functions>
 #include <tuple>
 
-class SphericalHarmonicsError {
+class SphericalHarmonicsCovariance {
     int l_max;
 
     int clm_idx(int l, int m) const {
@@ -20,30 +21,26 @@ class SphericalHarmonicsError {
 
 public:
     Eigen::MatrixXd Pxx;
-    SphericalHarmonicsError(int l_max) : l_max(l_max) {
+    SphericalHarmonicsCovariance(int l_max) : l_max(l_max) {
         int n = clm_idx(l_max + 1, 0);
         this->Pxx.resize(n, n);
     }
-
-    SphericalHarmonicsError(int l_max, std::string filename,
-                            std::string root = DATA_DIR)
-        : SphericalHarmonicsError(l_max) {
+    void from_normal(std::string filename, double scaling_factor = 1.0) {
         auto start = std::chrono::high_resolution_clock::now();
-        Sinex sinex(root + '/' + filename);
-        double k = 0.9330416388987962; // Scaling factor from comparison with
-                                       // provided Clm, Slm std dev
+        Sinex sinex(filename);
         auto N = sinex.get_normal_matrix(l_max);
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> s = end - start;
-        std::cout << "Normal matrix loaded in " << s.count() << " secs"
-                  << std::endl;
+        Logger::instance() << "Normal matrix loaded in " << s.count()
+                           << " secs \n";
         start = std::chrono::high_resolution_clock::now();
         this->Pxx =
-            k * N.llt().solve(Eigen::MatrixXd::Identity(N.rows(), N.cols()));
+            scaling_factor *
+            N.llt().solve(Eigen::MatrixXd::Identity(N.rows(), N.cols()));
         end = std::chrono::high_resolution_clock::now();
         s = end - start;
-        std::cout << "Normal matrix inverted in " << s.count() << " secs"
-                  << std::endl;
+        Logger::instance() << "Normal matrix inverted in " << s.count()
+                           << " secs \n";
     }
 
     Eigen::MatrixXd get_Pxx() const { return Pxx; }
@@ -104,9 +101,9 @@ public:
         int n = n_lon / 2;
         Eigen::VectorXd A(n + 1), B(n + 1);
         // Define latitude loop
-        std::cout << "Covariance propagation progress" << std::endl;
+        Logger::instance() << "Covariance propagation progress" << std::endl;
         for (int lat_idx = 0; lat_idx < n_lat; lat_idx++) {
-            std::cout << lat_idx << "/" << n_lat << "\r" << std::flush;
+            Logger::instance() << lat_idx << "/" << n_lat << "\r" << std::flush;
             // Compute Legendre polynomials
             Plm plm(l_max, M_PI_2 - lat_vec(lat_idx));
             // Loop over covariance rows
@@ -161,8 +158,8 @@ public:
         }
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> s = end - start;
-        std::cout << "Covariance propagation completed in " << s.count()
-                  << " secs" << std::endl;
+        Logger::instance() << "Covariance propagation completed in "
+                           << s.count() << " secs \n";
         // Return values
         return {lon_mesh, lat_mesh, y};
     }
@@ -202,4 +199,4 @@ public:
     }
 };
 
-#endif // SPHERICAL_HARMONICS_ERROR
+#endif // SPHERICAL_HARMONICS_COVARIANCE_HPP_
