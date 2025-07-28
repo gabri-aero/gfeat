@@ -7,12 +7,12 @@
 enum class Verbosity { Silent = 0, Info = 1 };
 
 class Logger {
-  private:
+private:
     Verbosity verbosity;
     std::mutex mutex_;
-    Logger() { this->set_verbosity(Verbosity::Info); };
+    Logger() { this->set_verbosity(Verbosity::Silent); };
 
-  public:
+public:
     static Logger &instance() {
         static Logger logger;
         return logger;
