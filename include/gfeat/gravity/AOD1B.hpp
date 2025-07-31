@@ -58,10 +58,10 @@ class AOD1B {
     std::unordered_map<std::pair<DateTime, AOD1BType>, SphericalHarmonics>
         sh_models;
 
-  public:
+public:
     AOD1B() {};
-    void load(std::string filename, std::string root = DATA_DIR) {
-        std::ifstream file(root + '/' + filename, std::ios::in);
+    AOD1B load(std::string filename) {
+        std::ifstream file(filename, std::ios::in);
 
         if (!file.is_open()) {
             std::cerr << "Error: file was not opened!" << std::endl;
@@ -164,6 +164,7 @@ class AOD1B {
                 sh.coefficients.setZero();
             }
         }
+        return *this;
     }
     SphericalHarmonics get(DateTime date, AOD1BType type) {
         return sh_models[{date, type}];

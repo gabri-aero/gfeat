@@ -5,15 +5,12 @@
 #include "SphericalHarmonics.hpp"
 
 class GravityField : public SphericalHarmonics {
-  public:
-    GravityField() = default;
-    GravityField(std::string filename, int l_max, std::string root = DATA_DIR)
-        : GravityField(filename, l_max, l_max, root) {}
-    GravityField(std::string filename, int l_max, int m_max,
-                 std::string root = DATA_DIR)
-        : SphericalHarmonics(l_max, m_max) {
+public:
+    using SphericalHarmonics::SphericalHarmonics;
+
+    GravityField load(std::string filename) {
         // Read data
-        auto data = FileReader::read(root + '/' + filename, ' ');
+        auto data = FileReader::read(filename, ' ');
         int l, m;
         // Assign data
         for (auto row : data) {
@@ -43,6 +40,7 @@ class GravityField : public SphericalHarmonics {
                 }
             }
         }
+        return *this;
     }
 };
 
