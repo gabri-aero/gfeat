@@ -9,7 +9,6 @@ struct Planet {
     double ae = 0.63781363000E+07;
     double rho_e = 5517;
     double rho_w = 1000;
-    double K = 1e-5; // Kaula constant
     // Copy operator
     Planet &operator=(const Planet &other) {
         if (this != &other) {
@@ -29,6 +28,5 @@ auto &theta_dot = planet.theta_dot;
 auto &C20 = planet.C20;
 auto &rho_e = planet.rho_e;
 auto &rho_w = planet.rho_w;
-auto &K = planet.K;
 
 #endif //_PLANET_HPP_
