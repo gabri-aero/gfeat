@@ -22,9 +22,9 @@ class Collinear : public BaseObservation {
     }
 
 public:
-    Collinear(int l_max, double I, double rho_0, int Nr, int Nd,
+    Collinear(int l_max, int Nr, int Nd, double I, double rho_0,
               double we_0 = 0.0, double wo_0 = 0.0)
-        : BaseObservation(l_max, I, Nr, Nd, we_0, wo_0) {
+        : BaseObservation(l_max, Nr, Nd, I, we_0, wo_0) {
         this->eta = asin(rho_0 / (2 * this->r));
         // Need to define a constructor to be able to load H function override
         this->initialize_block_observation_system();

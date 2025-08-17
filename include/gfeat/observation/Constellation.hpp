@@ -1,14 +1,16 @@
 #ifndef _CONSTELLATION_HPP_
 #define _CONSTELLATION_HPP_
 
-#include "BaseMultiObservation.hpp"
+#include <vector>
+
 #include "Collinear.hpp"
+#include "MultiObservation.hpp"
 
 enum class LongitudePolicy { INTERLEAVING = 0, OVERLAPPING = 1 };
 
 class Constellation : public MultiObservation {
 private:
-    static auto get_observations(int l_max, Eigen::VectorXd inclinations,
+    static auto get_observations(int l_max, std::vector<double> inclinations,
                                  double rho, int Nr, int Nd,
                                  LongitudePolicy policy) {
         std::vector<std::shared_ptr<BaseObservation>> collinear_observations;
@@ -18,14 +20,14 @@ private:
         for (int k = 0; k < Np; k++) {
             double dlam_0 = M_PI * (i + 1) * (1 + j) * k / (Nr * Np);
             collinear_observations.push_back(std::make_shared<Collinear>(
-                l_max, inclinations[k], rho, Nr, Nd, dlam_0, 0));
+                l_max, Nr, Nd, inclinations[k], rho, dlam_0, 0));
         }
         return collinear_observations;
     }
 
 public:
-    Constellation(int l_max, Eigen::VectorXd inclinations, double rho, int Nr,
-                  int Nd,
+    Constellation(int l_max, int Nr, int Nd, std::vector<double> inclinations,
+                  double rho,
                   LongitudePolicy policy = LongitudePolicy::INTERLEAVING)
         : MultiObservation(
               l_max, Nr, Nd,
@@ -47,15 +49,7 @@ public:
             };
             observation->set_observation_error(combined_error);
         }
-        this->update();
     }
-};
-
-class Bender : public Constellation {
-public:
-    Bender(int l_max, Eigen::VectorXd inclinations, double eta, int Nr, int Nd,
-           LongitudePolicy policy = LongitudePolicy::INTERLEAVING)
-        : Constellation(l_max, inclinations, eta, Nr, Nd, policy) {}
 };
 
 #endif // _CONSTELLATION_HPP_

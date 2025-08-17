@@ -14,9 +14,9 @@ class AlongTrack : public BaseObservation {
     }
 
 public:
-    AlongTrack(int l_max, double I, int Nr, int Nd, double we_0 = 0.0,
+    AlongTrack(int l_max, int Nr, int Nd, double I, double we_0 = 0.0,
                double wo_0 = 0.0)
-        : BaseObservation(l_max, I, Nr, Nd, we_0, wo_0) {
+        : BaseObservation(l_max, Nr, Nd, I, we_0, wo_0) {
         this->delta_psi_km_0 = M_PI / 2; // (Akm, Bkm) -> (Slm, -Clm)
         // Need to define a constructor to be able to load H function override
         this->initialize_block_observation_system();

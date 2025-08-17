@@ -23,7 +23,7 @@ public:
         this->flmp = Flmp(this->l_max, this->I, true);
     }
 
-    CrossTrack(int l_max, double I, int Nr, int Nd, double we_0 = 0.0,
+    CrossTrack(int l_max, int Nr, int Nd, double I, double we_0 = 0.0,
                double wo_0 = 0.0)
         : BaseObservation(l_max, I, Nr, Nd, we_0, wo_0) {
         this->delta_psi_km_0 = M_PI / 2; // (Akm, Bkm) -> (Slm, -Clm)

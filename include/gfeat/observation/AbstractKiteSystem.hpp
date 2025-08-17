@@ -25,9 +25,6 @@ using DiagonalMatrixXd = Eigen::DiagonalMatrix<double, Eigen::Dynamic>;
 
 class AbstractKiteSystem {
 protected:
-    std::vector<Eigen::MatrixXd> H; // Design matrix
-    std::vector<Eigen::DiagonalMatrixXd>
-        Pyy; // Observation covariance matrix (no correlation)
     std::vector<Eigen::MatrixXd> Pxx; // Parameter covariance matrix
     std::vector<Eigen::DiagonalMatrixXd>
         Pcc_inv; // Parameter a-priori covariance (no cross-terms)
@@ -37,7 +34,6 @@ protected:
 
     int l_max;           // Maximum degree
     std::vector<int> nx; // Number of parameters (per block)
-    std::vector<int> ny; // Number of observations (per block)
     int Nx;              // Total number of parameters
 
     // Repeating ground-track conditions
@@ -76,13 +72,10 @@ public:
         m_blocks.resize(n_blocks);
         clm_idx.resize(n_blocks);
         slm_idx.resize(n_blocks);
-        H.resize(n_blocks);
-        Pyy.resize(n_blocks);
         Pxx.resize(n_blocks);
         Pcc_inv.resize(n_blocks);
         N.resize(n_blocks);
         nx.resize(n_blocks);
-        ny.resize(this->n_blocks);
         // Define orders that form a common block
         int n, m;
         // Loop over blocks
@@ -159,12 +152,12 @@ public:
         // Global initialization flag
         global_initialized = true;
     }
-    void set_kaula_regularization() {
+    void set_kaula_regularization(double K = 1e-5) {
         double sigma_lm;
         for (int m0 = 0; m0 < n_blocks; m0++) {
             for (int m : m_blocks.at(m0)) {
                 for (int l = std::max(m, 2); l <= l_max; l++) {
-                    sigma_lm = 1e-5 / pow(l, 2); // Kaula's rule of thumb
+                    sigma_lm = K / pow(l, 2); // Kaula's rule of thumb
                     int clm_i = clm_idx.at(m0)[{l, m}];
                     Pcc_inv.at(m0).diagonal()(clm_i) = 1 / pow(sigma_lm, 2);
                     if (m > 0) {
@@ -176,17 +169,14 @@ public:
         }
     }
 
+    virtual void compute_normal_matrix() = 0;
+
     void block_solve() {
         auto t1 = std::chrono::high_resolution_clock::now();
+        // First compute normal matrices
+        this->compute_normal_matrix();
+        // Then compute parameter covariance
         for (int m0 = 0; m0 < n_blocks; m0++) {
-            // Compute weighted normal matrix
-            N.at(m0) = H.at(m0).transpose() *
-                       (1 / n_rgt * Pyy.at(m0))
-                           .diagonal()
-                           .cwiseInverse()
-                           .asDiagonal() *
-                       H.at(m0);
-            // Compute parameter covariance
             // Cholesky factorization employed for efficient inversion
             Pxx.at(m0) = (N.at(m0) + Pcc_inv.at(m0).toDenseMatrix())
                              .llt()
@@ -209,22 +199,107 @@ public:
         Logger::instance() << "Parameter covariance solved: "
                            << duration.count() * 1e-3 << " s\n";
     }
-    auto &get_Pyy_blocks() { return Pyy; }
     auto &get_Pxx_blocks() { return Pxx; }
     auto &get_N_blocks() { return N; }
-    auto &get_H_blocks() { return H; }
     auto &get_sigma_x() { return sigma_x; }
     auto get_nx() const { return nx; }
-    auto get_ny() const { return ny; }
-    virtual Eigen::MatrixXd get_H() = 0;
-    virtual Eigen::MatrixXd get_Pyy() = 0;
+
     Eigen::MatrixXd get_N() {
-        Eigen::MatrixXd H = get_H();
-        Eigen::MatrixXd Pyy = get_Pyy();
-        Eigen::MatrixXd N =
-            H.transpose() * Pyy.diagonal().cwiseInverse().asDiagonal() * H;
-        return N;
+        if (!this->global_initialized)
+            this->global_initialization();
+        // Pre-allocate
+        Eigen::MatrixXd N_full(this->Nx, this->Nx);
+        N_full.setZero();
+        // Assign from block matrices
+        int block_clm_i, block_slm_i, block_clm_j, block_slm_j;
+        int global_clm_i, global_slm_i, global_clm_j, global_slm_j;
+        for (int m0 = 0; m0 < this->n_blocks; m0++) {
+            for (int mi : this->m_blocks.at(m0)) {
+                for (int li = std::max(mi, 2); li <= l_max; li++) {
+                    // Compute Clm, Slm indexing for rows
+                    block_clm_i = this->clm_idx.at(m0)[{li, mi}];
+                    global_clm_i = this->global_clm_idx[{li, mi}];
+                    if (mi > 0) {
+                        block_slm_i = this->slm_idx.at(m0)[{li, mi}];
+                        global_slm_i = this->global_slm_idx[{li, mi}];
+                    }
+                    for (int mj : this->m_blocks.at(m0)) {
+                        for (int lj = std::max(mj, 2); lj <= l_max; lj++) {
+                            // Compute Clm, Slm indexing for cols
+                            block_clm_j = this->clm_idx.at(m0)[{lj, mj}];
+                            global_clm_j = this->global_clm_idx[{lj, mj}];
+                            if (mj > 0) {
+                                block_slm_j = this->slm_idx.at(m0)[{lj, mj}];
+                                global_slm_j = this->global_slm_idx[{lj, mj}];
+                                // Allocate Slm values
+                                N_full(global_clm_i, global_slm_j) =
+                                    N.at(m0)(block_clm_i, block_slm_j);
+                                if (mi > 0)
+                                    N_full(global_slm_i, global_slm_j) =
+                                        N.at(m0)(block_slm_i, block_slm_j);
+                            }
+                            N_full(global_clm_i, global_clm_j) =
+                                N.at(m0)(block_clm_i, block_clm_j);
+                            if (mi > 0)
+                                N_full(global_slm_i, global_clm_j) =
+                                    N.at(m0)(block_slm_i, block_clm_j);
+                        }
+                    }
+                }
+            }
+        }
+        // Return full normal matrix
+        return N_full;
     }
+
+    Eigen::MatrixXd get_Pxx() {
+        if (!this->global_initialized)
+            this->global_initialization();
+        // Pre-allocate
+        Eigen::MatrixXd Pxx_full(this->Nx, this->Nx);
+        Pxx_full.setZero();
+        // Assign from block matrices
+        int block_clm_i, block_slm_i, block_clm_j, block_slm_j;
+        int global_clm_i, global_slm_i, global_clm_j, global_slm_j;
+        for (int m0 = 0; m0 < this->n_blocks; m0++) {
+            for (int mi : this->m_blocks.at(m0)) {
+                for (int li = std::max(mi, 2); li <= l_max; li++) {
+                    // Compute Clm, Slm indexing for rows
+                    block_clm_i = this->clm_idx.at(m0)[{li, mi}];
+                    global_clm_i = this->global_clm_idx[{li, mi}];
+                    if (mi > 0) {
+                        block_slm_i = this->slm_idx.at(m0)[{li, mi}];
+                        global_slm_i = this->global_slm_idx[{li, mi}];
+                    }
+                    for (int mj : this->m_blocks.at(m0)) {
+                        for (int lj = std::max(mj, 2); lj <= l_max; lj++) {
+                            // Compute Clm, Slm indexing for cols
+                            block_clm_j = this->clm_idx.at(m0)[{lj, mj}];
+                            global_clm_j = this->global_clm_idx[{lj, mj}];
+                            if (mj > 0) {
+                                block_slm_j = this->slm_idx.at(m0)[{lj, mj}];
+                                global_slm_j = this->global_slm_idx[{lj, mj}];
+                                // Allocate Slm values
+                                Pxx_full(global_clm_i, global_slm_j) =
+                                    Pxx.at(m0)(block_clm_i, block_slm_j);
+                                if (mi > 0)
+                                    Pxx_full(global_slm_i, global_slm_j) =
+                                        N.at(m0)(block_slm_i, block_slm_j);
+                            }
+                            Pxx_full(global_clm_i, global_clm_j) =
+                                Pxx.at(m0)(block_clm_i, block_clm_j);
+                            if (mi > 0)
+                                Pxx_full(global_slm_i, global_clm_j) =
+                                    Pxx.at(m0)(block_slm_i, block_clm_j);
+                        }
+                    }
+                }
+            }
+        }
+        // Return full normal matrix
+        return Pxx_full;
+    }
+
     double get_sigma_Clm(int l, int m) const { return sigma_x(l, m); }
     double get_sigma_Slm(int l, int m) const {
         return m == 0 ? 0 : sigma_x(m - 1, l);
@@ -266,7 +341,7 @@ public:
             Eigen::VectorXd::LinSpaced(n_lon, -n_lon / 2 + 1, n_lon / 2) * dlon;
         Eigen::VectorXd colat_vec =
             Eigen::VectorXd::LinSpaced(n_lat, 0.5, n_lat - 0.5) * dlat;
-        Eigen::VectorXd lat_vec = (colat_vec.array() - M_PI_2).matrix();
+        Eigen::VectorXd lat_vec = (M_PI_2 - colat_vec.array()).matrix();
         // Apply broadcasting for generating mesh
         Eigen::MatrixXd lon_mesh =
             (lon_vec * 180 / M_PI).transpose().replicate(n_lat, 1);
@@ -326,8 +401,8 @@ public:
                         B(m) += f(l) * plm.get_Plm_bar(l, m) *
                                 Pxx(row_idx, col_idx);
                     }
-                    // Compute Wi matrix (way more faster than FFT - Am, Bm full
-                    // of zeros)
+                    // Compute Wi matrix (way more faster than FFT - Am, Bm
+                    // full of zeros)
                     for (int lon_idx = 0; lon_idx < n_lon; lon_idx++) {
                         for (int m : m_blocks[m0]) {
                             W(row_idx, lon_idx) += A(m) * cos_mlam(m, lon_idx) +

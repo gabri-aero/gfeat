@@ -11,8 +11,12 @@
 
 class BaseObservation : public AbstractKiteSystem {
 protected:
-    // Observation parameters for BlockSystem
-    int Ny; // Total number of observations
+    std::vector<Eigen::MatrixXd> H; // Design matrix
+    std::vector<Eigen::DiagonalMatrixXd>
+        Pyy; // Observation covariance matrix (no correlation)
+
+    std::vector<int> ny; // Number of observations (per block)
+    int Ny;              // Total number of observations
     // Index mappings
     // (k,m) to observation block index mapping
     std::vector<std::unordered_map<std::pair<int, int>, int, _PairHash>>
@@ -26,30 +30,35 @@ protected:
     std::vector<std::set<int>> gamma_km; // k*Nr - m*Nd
 
     // Configuration parameters
-    double r;
-    double I;
-    std::function<double(double)> asd;
-    // Additional parameters
-    double n;      // Mean motion
-    double we_dot; // Earth frequency
-    double wo_dot; // Orbital frequency
-    double we_0;   // Initial Earth angle (initial longitude)
-    double wo_0;   // Initial argument of latitude
-    Flmp flmp;     // Inclination functions
-    double delta_psi_km_0 =
-        0; // Shift in initial phase angle to handle general
-           // purpose observation 0    : ( Clm,  Slm) π/2  : (-Slm,
-           // Clm) π    : (-Clm, -Slm) -π/2 : ( Slm, -Clm)
+    double r;                          // Orbital radius
+    double I;                          // Inclination
+    std::function<double(double)> asd; // Amplitude Spectral Density
+    double n;                          // Mean motion
+    double we_dot;                     // Earth frequency
+    double wo_dot;                     // Orbital frequency
+    double we_0; // Initial Earth angle (initial longitude)
+    double wo_0; // Initial argument of latitude
+    Flmp flmp;   // Inclination functions
 
+    // Shift in initial phase angle to handle general
+    // purpose observation
+    // 0    : ( Clm,  Slm)
+    // π/2  : (-Slm, Clm)
+    // π    : (-Clm, -Slm)
+    // -π/2 : ( Slm, -Clm)
+    double delta_psi_km_0 = 0;
+
+    // Function that defines partials
     virtual double H_(int l, int m, int k) const = 0;
 
 public:
+    // Function that defines starting cut-off degree for summation
     virtual int l_min(int m, int k) const {
         int delta = (k - std::max({std::abs(k), m, 2})) % 2 == 0 ? 0 : 1;
         return std::max({std::abs(k), m, 2}) + delta;
     }
 
-    BaseObservation(int l_max, double I, int Nr, int Nd, double we_0 = 0.0,
+    BaseObservation(int l_max, int Nr, int Nd, double I, double we_0 = 0.0,
                     double wo_0 = 0.0)
         : AbstractKiteSystem(l_max, Nr, Nd),
           r(sma_from_rgt(Nr, Nd, 7000.0e3, I)), I(I), we_0(we_0), wo_0(wo_0) {
@@ -64,6 +73,9 @@ public:
     void initialize_block_observation_system() {
         auto t1 = std::chrono::high_resolution_clock::now();
         // Allocate everything observation related for computed number of blocks
+        H.resize(this->n_blocks);
+        Pyy.resize(this->n_blocks);
+        ny.resize(this->n_blocks);
         Akm_idx.resize(this->n_blocks);
         Bkm_idx.resize(this->n_blocks);
         gamma_km.resize(this->n_blocks);
@@ -166,7 +178,11 @@ public:
                            << duration.count() * 1e-3 << " s\n";
     }
 
-    Eigen::MatrixXd get_H() override final {
+    auto &get_Pyy_blocks() { return Pyy; }
+    auto &get_H_blocks() { return H; }
+    auto get_ny() const { return ny; }
+
+    Eigen::MatrixXd get_H() {
         if (!this->global_initialized)
             this->global_initialization();
         // Pre-allocate
@@ -406,6 +422,18 @@ public:
     double get_wo_dot() const { return wo_dot; }
 
     double get_df() const { return this->df; }
+
+    void compute_normal_matrix() override final {
+        // Compute weighted normal matrix
+        for (int m0 = 0; m0 < this->n_blocks; m0++) {
+            this->N.at(m0) = H.at(m0).transpose() *
+                             (1 / this->n_rgt * Pyy.at(m0))
+                                 .diagonal()
+                                 .cwiseInverse()
+                                 .asDiagonal() *
+                             H.at(m0);
+        }
+    };
 };
 
 #endif //_BASE_OBSERVATION_HPP_
