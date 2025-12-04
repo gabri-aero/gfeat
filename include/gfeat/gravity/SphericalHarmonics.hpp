@@ -12,7 +12,7 @@
 #include <iostream>
 
 class SphericalHarmonics {
-  public:
+private:
     // Kronecker delta definition
     int d(int i, int j) { return i == j ? 1 : 0; }
 
@@ -201,7 +201,7 @@ class SphericalHarmonics {
         return mat;
     }
 
-  public:
+public:
     // Class public attributes
     int l_max;
     int m_max;

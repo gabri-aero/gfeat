@@ -18,27 +18,6 @@ TEST(TestSH, GravityTest) {
     }
 }
 
-TEST(TestSH, GravityGradientSphericalTest) {
-    auto sh = GravityField("gravity/static/GOCO05c.gfc", 100);
-    Eigen::Vector3d sph = {7000e3, 1, -1};
-    Eigen::Vector3d r_ecrf = sph2cart(sph);
-    Eigen::Vector3d r_ecrf_shifted, sph_shifted;
-    Eigen::Matrix3d gg = sh.ddV_ddsph(r_ecrf);
-    Eigen::Matrix3d gg_num;
-
-    Eigen::Vector3d h = {1e-5, 1e-10, 1e-10};
-    for (int i = 0; i < 3; i++) {
-        sph_shifted = sph;
-        sph_shifted(i) += h(i);
-        r_ecrf_shifted = sph2cart(sph_shifted);
-        gg_num.row(i) =
-            (sh.dV_dsph(r_ecrf_shifted) - sh.dV_dsph(r_ecrf)) / h(i);
-        for (int j = 0; j < 3; j++) {
-            ASSERT_NEAR((gg_num(i, j) - gg(i, j)) / gg(i, j), 0, 5e-4);
-        }
-    }
-}
-
 TEST(TestSH, GravityGradientCartesianTest) {
     auto sh = GravityField("gravity/static/GOCO05c.gfc", 100);
     Eigen::Vector3d sph = {7000e3, 1, -1};

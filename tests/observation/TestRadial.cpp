@@ -3,7 +3,7 @@
 #include <limits>
 #include <typeinfo>
 
-#include "gtest/gtest.h"
+#include <gtest.h>
 
 #include <gfeat>
 

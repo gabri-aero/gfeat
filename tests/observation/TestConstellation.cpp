@@ -15,7 +15,7 @@ TEST(TestConstellation, BuildMatrix) {
     Eigen::VectorXd inclinations(Np);
     inclinations << 90, 80, 70, 60;
     inclinations = inclinations * M_PI / 180;
-    Constellation constellation(l_max, inclinations, 200e3, Nr, Nd);
+    Constellation constellation(l_max, Nr, Nd, inclinations, 200e3);
     auto range_psd = [](double f) {
         return 2.62 * sqrt(1 + pow(0.003 / f, 2)) * 1e-6;
     };

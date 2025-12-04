@@ -75,7 +75,6 @@ public:
             R"(DATA SET (\d+):\s+\d+\s+COEFFICIENTS FOR (\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}) OF TYPE (\w+))");
         std::smatch match;
         DateTime date;
-        AOD1BType type;
         int dataset_number = 0;
         int total_datasets;
         int l, m;
@@ -125,6 +124,7 @@ public:
         }
 
         while (getline(file, line)) {
+            AOD1BType type;
             if (read_dataset) {
                 std::stringstream ss(line);
                 ss >> l >> m >> Clm >> Slm;
@@ -159,6 +159,8 @@ public:
                     type = GLO;
                 } else if (match[8] == "oba") {
                     type = OBA;
+                } else {
+                    type = UNKNOWN;
                 }
                 // Reset coefficients data
                 sh.coefficients.setZero();

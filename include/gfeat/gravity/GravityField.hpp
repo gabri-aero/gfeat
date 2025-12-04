@@ -8,6 +8,14 @@ class GravityField : public SphericalHarmonics {
 public:
     using SphericalHarmonics::SphericalHarmonics;
 
+    GravityField(std::string filename, int l_max, int m_max)
+        : GravityField(l_max, m_max) {
+        this->load(filename);
+    }
+
+    GravityField(std::string filename, int l_max)
+        : GravityField(filename, l_max, l_max) {}
+
     GravityField load(std::string filename) {
         // Read data
         auto data = FileReader::read(filename, ' ');
