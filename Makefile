@@ -29,7 +29,7 @@ GTEST_LIBS = -lgtest -lgtest_main -pthread
 GTEST_DIR = /usr/include/gtest
 
 # Build tests
-test: $(TEST_EXES)
+tests: $(TEST_EXES)
 	@for test_exe in $(TEST_EXES); do \
 		./$$test_exe; \
 	done
