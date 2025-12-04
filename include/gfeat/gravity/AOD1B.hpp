@@ -159,8 +159,6 @@ public:
                     type = GLO;
                 } else if (match[8] == "oba") {
                     type = OBA;
-                } else {
-                    type = UNKNOWN;
                 }
                 // Reset coefficients data
                 sh.coefficients.setZero();
