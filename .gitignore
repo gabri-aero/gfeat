@@ -45,4 +45,5 @@ data/
 .vscode/
 build/
 docs/
+pydocs/_*
 __pycache__/
