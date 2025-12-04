@@ -132,6 +132,7 @@ public:
         Logger::instance() << "Block system - parameter initialization: "
                            << duration.count() * 1e-3 << " s\n";
     }
+
     void global_initialization() {
         // Define typical global indexing for parameters
         int i = 0;
@@ -152,6 +153,7 @@ public:
         // Global initialization flag
         global_initialized = true;
     }
+
     void set_kaula_regularization(double K = 1e-5) {
         double sigma_lm;
         for (int m0 = 0; m0 < n_blocks; m0++) {
@@ -430,7 +432,6 @@ public:
                 }
             }
         }
-        std::cout << "\n";
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
@@ -457,7 +458,6 @@ public:
     void set_solution_time_window(double days) {
         double time_window = days * 24 * 3600;
         this->n_rgt = time_window * this->df;
-        std::cout << this->n_rgt << std::endl;
     }
 };
 

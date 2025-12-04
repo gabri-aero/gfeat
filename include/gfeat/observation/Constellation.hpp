@@ -10,7 +10,7 @@ enum class LongitudePolicy { INTERLEAVING = 0, OVERLAPPING = 1 };
 
 class Constellation : public MultiObservation {
 private:
-    static auto get_observations(int l_max, std::vector<double> inclinations,
+    static auto get_observations(int l_max, Eigen::VectorXd inclinations,
                                  double rho, int Nr, int Nd,
                                  LongitudePolicy policy) {
         std::vector<std::shared_ptr<BaseObservation>> collinear_observations;
@@ -26,7 +26,7 @@ private:
     }
 
 public:
-    Constellation(int l_max, int Nr, int Nd, std::vector<double> inclinations,
+    Constellation(int l_max, int Nr, int Nd, Eigen::VectorXd inclinations,
                   double rho,
                   LongitudePolicy policy = LongitudePolicy::INTERLEAVING)
         : MultiObservation(
