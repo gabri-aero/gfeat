@@ -7,6 +7,24 @@
 
 ### Installation
 
+The library is available in the Python Package Index. It is recommended to create a conda environment first.
+```{bash}
+conda create env --name gfeat_env
+```
+Then, install the library.
+```{bash}
+pip install gfeatpy
+```
+
+
+### Future Improvements
+
+- Add and improve unit tests for all components
+- Extend Constellation class to any observation
+- Include optimization examples with PyGMO
+
+### Development
+
 
 ### References
 
