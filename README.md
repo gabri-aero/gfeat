@@ -4,6 +4,17 @@
 
 ### Features
 
+- Estimation of gravity field error.
+    - Error propagation from observations PSD to the Stokes' coefficients.
+    - Several observation types supported: gravity potential, radial, along-track and cross-track displacements, inter-satellite range...
+    - Combination of multiple observation types: 3D GPS position and multi-pair constellations.
+- Processing of gravity field data.
+    - Gravity field I/O handling.
+    - Error covariance handling from normal equations.
+    - Synthesis with different functionals: EWH, gravity anomalies, geoid heights.
+    - Covariance synthesis also supported.
+    - FFT employed for efficient computation.
+
 
 ### Installation
 
@@ -16,14 +27,23 @@ Then, install the library.
 pip install gfeatpy
 ```
 
-
 ### Future Improvements
 
-- Add and improve unit tests for all components
-- Extend Constellation class to any observation
-- Include optimization examples with PyGMO
+- Add and improve unit tests for all components.
+- Extend Constellation class to any observation.
+- Include range-rate, range-acceleration.
+- Include optimization examples with PyGMO.
 
-### Development
+### C++ development
+
+To use the library natively in C++ is currently not recommended given the limitations for output data as well as the easier to use plotting tools available in Python. However, a good starting point are the C++ unit tests, under the `test` folder.
+
+Some very descriptive examples can be found in [TestConstellation.cpp](https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestConstellation.cpp) and [TestCollinear.cpp](https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestCollinear.cpp). You can build and run all the tests like this.
+```{make}
+make tests
+```
+
+The Makefile at the project root can guide you setting up the dependencies for your project.
 
 
 ### References
