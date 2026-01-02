@@ -43,8 +43,11 @@ public:
                 m = std::stoi(row[2]);
                 if (l <= this->l_max and m <= this->l_max) {
                     this->Clm(l, m) = std::stod(row[3]);
-                    if (m > 0)
+                    this->sigma_Clm(l, m) = std::stod(row[5]);
+                    if (m > 0) {
                         this->Slm(l, m) = std::stod(row[4]);
+                        this->sigma_Slm(l, m) = std::stod(row[6]);
+                    }
                 }
             }
         }

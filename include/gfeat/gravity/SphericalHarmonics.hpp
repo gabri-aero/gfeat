@@ -208,6 +208,7 @@ public:
     double mu;
     double ae;
     Eigen::MatrixXd coefficients;
+    Eigen::MatrixXd sigmas;
 
     // Constructors
     SphericalHarmonics() = default;
@@ -217,8 +218,10 @@ public:
         this->m_max = m_max;
         // Allocate coefficient matrices
         this->coefficients.resize(l_max + 1, l_max + 1);
+        this->sigmas.resize(l_max + 1, l_max + 1);
         // Assign default
         this->coefficients.setZero();
+        this->sigmas.setZero();
         this->Clm(0, 0) = 1; // by definition
     }
 
@@ -227,6 +230,12 @@ public:
     double Slm(int l, int m) const { return coefficients(m - 1, l); }
     double &Clm(int l, int m) { return coefficients(l, m); }
     double &Slm(int l, int m) { return coefficients(m - 1, l); }
+
+    // Stokes coefficients std deviation indexing functions
+    double sigma_Clm(int l, int m) const { return sigmas(l, m); }
+    double sigma_Slm(int l, int m) const { return sigmas(m - 1, l); }
+    double &sigma_Clm(int l, int m) { return sigmas(l, m); }
+    double &sigma_Slm(int l, int m) { return sigmas(m - 1, l); }
 
     Eigen::Vector3d gravity(Eigen::Vector3d r_ecrf) {
         return dcart_dsph(r_ecrf).transpose() *
@@ -263,8 +272,14 @@ public:
             [this](double r) -> double { return 1e5 * mu / pow(ae, 2); });
     }
 
-    Eigen::VectorXd degree_variance() const {
+    Eigen::VectorXd degree_variance(bool use_sigmas = false) const {
         Eigen::VectorXd degree_variance(this->l_max + 1);
+        auto Clm = [this, use_sigmas](int l, int m) {
+            return use_sigmas ? this->sigma_Clm(l, m) : this->Clm(l, m);
+        };
+        auto Slm = [this, use_sigmas](int l, int m) {
+            return use_sigmas ? this->sigma_Slm(l, m) : this->Slm(l, m);
+        };
         degree_variance.setZero();
         for (int l = 2; l <= l_max; l++) {
             for (int m = 0; m <= l; m++) {
@@ -278,9 +293,10 @@ public:
         return degree_variance;
     }
 
-    Eigen::VectorXd rms_per_coefficient_per_degree() const {
+    Eigen::VectorXd
+    rms_per_coefficient_per_degree(bool use_sigmas = false) const {
         Eigen::VectorXd result(l_max + 1);
-        auto deg_var = this->degree_variance();
+        auto deg_var = this->degree_variance(use_sigmas);
         for (int l = 2; l <= this->l_max; l++) {
             result(l) = std::sqrt(deg_var.coeff(l) / (2 * l + 1));
         }
@@ -323,8 +339,8 @@ public:
         Eigen::VectorXd A(n + 1), B(n + 1);
         // Define latitude loop
         for (int lat_idx = 0; lat_idx < n_lat; lat_idx++) {
-            Logger::instance() << "\rSynthesis progress: " << lat_idx + 1 << "/"
-                               << n_lat << std::flush;
+            logger << "\rSynthesis progress: " << lat_idx + 1 << "/" << n_lat
+                   << std::flush;
             // Compute Legendre polynomials
             Plm plm(l_max, M_PI_2 - lat_vec(lat_idx));
             // Fill A, B
