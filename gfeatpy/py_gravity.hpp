@@ -11,8 +11,8 @@ void init_gravity(py::module &m) {
     auto base_functional = py::class_<BaseFunctional>(m, "BaseFunctional",
                                                       R"doc(
             BaseFunctional is an abstract class that serves as parent class to implement 
-            different gravity field functionals. For this purpose, it contains a private
-            ``common_degree_factor`` attribute that is overloaded by the child classes. 
+            different gravity field functionals. For this purpose, it contains a function
+            ``degree_dependent_factor`` that is overloaded by the child classes. 
 
             It is employed internally in both the Global Spherical Harmonics Synthesis 
             and the computation of degree variances. This allows for code modularity
@@ -58,6 +58,12 @@ void init_gravity(py::module &m) {
                 BaseFunctional        
         )doc");
 
+    base_functional.def("_degree_dependent_factor",
+                        &BaseFunctional::degree_dependent_factor,
+                        py::arg("degree"));
+
+    base_functional.def_readonly("_common_factor",
+                                 &BaseFunctional::common_factor);
     gravity_anomaly.def(py::init<>(),
                         R"doc(
             Constructor for GravityAnomaly.
@@ -166,21 +172,33 @@ void init_gravity(py::module &m) {
                 A 2D array with functional values on the lon/lat grid.
              )doc")
         .def("degree_variance", &SphericalHarmonics::degree_variance,
+             py::arg("use_sigmas"),
              R"doc(
             This function computes degree variance spectrum from the values 
             of the SH coefficients.
 
             .. math::
                 \sigma_l^2 = \sum_{m=0}^{l} \bar{C}_{lm}^2 + \bar{S}_{lm}^2
+
+            Parameters
+            -----------
+            use_sigmas : bool
+                Flag to indicate if the standard deviations are used instead of the coefficients.
             )doc")
         .def("rms_per_coefficient_per_degree",
              &SphericalHarmonics::rms_per_coefficient_per_degree,
+             py::arg("use_sigmas"),
              R"doc(
             This function computes RMS per coefficient per degree from the values 
             of the SH coefficients.
 
             .. math::
                 \delta_l = \sqrt{\sum_{m=0}^{l} \frac{\bar{C}_{lm}^2 + \bar{S}_{lm}^2}{2l+1}}
+
+            Parameters
+            -----------
+            use_sigmas : bool
+                Flag to indicate if the standard deviations are used instead of the coefficients.
             )doc")
         .def_readwrite("mu", &SphericalHarmonics::mu, "")
         .def_readwrite("ae", &SphericalHarmonics::ae)
@@ -196,6 +214,11 @@ void init_gravity(py::module &m) {
                     \vdots & \vdots & \ddots & \vdots \\
                     \bar{C}_{L0} & \bar{C}_{L1} & \cdots & \bar{C}_{LL}
                 \end{bmatrix}
+            )doc")
+        .def_readwrite("sigmas", &SphericalHarmonics::sigmas,
+                       R"doc(
+            This property points to the (L+1)x(L+1) dense matrix storing the standard deviations of the
+            SH coefficients. The matrix structure is equivalent to :py:attr:`~SphericalHarmonics.coefficients`.
             )doc");
     ;
     auto sh_error = py::class_<SphericalHarmonicsCovariance>(

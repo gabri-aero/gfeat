@@ -250,6 +250,26 @@ void init_observation(py::module &m) {
             float
                 Orbital radius associated to the Repeating Ground-Track of the observation.
 
+            )doc")
+        .def("get_wo_0", &BaseObservation::get_wo_0, R"doc(
+            
+            Getter for the initial argument of latitude associated to the Repeating Ground-Track selected.
+            
+            Return
+            --------
+            float
+                Initital argument of latitude associated to the Repeating Ground-Track of the observation.
+
+            )doc")
+        .def("get_we_0", &BaseObservation::get_we_0, R"doc(
+            
+            Getter for the initial planet-centred longitude associated to the Repeating Ground-Track selected.
+            
+            Return
+            --------
+            float
+                Initial planet-centred longitude associated to the Repeating Ground-Track of the observation.
+
             )doc");
 
     auto line_potential =
@@ -479,7 +499,8 @@ void init_observation(py::module &m) {
 
     gps.def(py::init<int, int, int, double, double, double>(), py::arg("l_max"),
             py::arg("Nr"), py::arg("Nd"), py::arg("I"), py::arg("we_0"),
-            py::arg("wo_0"));
+            py::arg("wo_0"))
+        .def("set_observation_error", &GPS::set_observation_error);
 
     auto constellation =
         py::class_<Constellation, MultiObservation,
@@ -495,12 +516,12 @@ void init_observation(py::module &m) {
         )doc");
 
     constellation
-        .def(py::init<int, int, int, std::vector<double>, double,
-                      LongitudePolicy>(),
-             py::arg("l_max"), py::arg("Nr"), py::arg("Nd"), py::arg("I"),
-             py::arg("rho_0"),
-             py::arg("longitude_policy") = LongitudePolicy::INTERLEAVING,
-             R"doc(
+        .def(
+            py::init<int, int, int, Eigen::VectorXd, double, LongitudePolicy>(),
+            py::arg("l_max"), py::arg("Nr"), py::arg("Nd"), py::arg("I"),
+            py::arg("rho_0"),
+            py::arg("longitude_policy") = LongitudePolicy::INTERLEAVING,
+            R"doc(
             
             Parameters
             -----------
