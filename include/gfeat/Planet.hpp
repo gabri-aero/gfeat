@@ -5,7 +5,7 @@ struct Planet {
     // Define default planet properties
     double mu = 0.39860044150E+15;
     double theta_dot = 7.2921159e-5;
-    double C20 = 1.08263e-3;
+    double C20 = -1.08263e-3;
     double ae = 0.63781363000E+07;
     double rho_e = 5517;
     double rho_w = 1000;
@@ -19,6 +19,7 @@ struct Planet {
     }
 };
 
+// Global planet object
 Planet planet;
 
 // Define alias to planet variables
