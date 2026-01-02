@@ -42,8 +42,9 @@ public:
             double H_acc_v =
                 abs((3 * n * n + w * w) / (w * w * (n * n - w * w)));
             double H_acc_u = abs(2 * n / (w * (n * n - w * w)));
-            return range_asd(f) +
-                   2 * (H_acc_u + H_acc_v) * accelerometer_asd(f);
+            return sqrt(pow(range_asd(f), 2) +
+                        (pow(2 * H_acc_u, 2) + pow(2 * H_acc_v, 2)) *
+                            pow(accelerometer_asd(f), 2));
         };
         this->set_observation_error(combined_error);
     }
