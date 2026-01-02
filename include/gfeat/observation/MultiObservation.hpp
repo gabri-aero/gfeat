@@ -19,9 +19,9 @@ public:
     auto get_observations() const { return this->observations; }
 
     void compute_normal_matrix() override final {
-        for (int m0 = 0; m0 < this->n_blocks; m0++) {
-            for (auto &observation : this->observations) {
-                observation->compute_normal_matrix();
+        for (auto &observation : this->observations) {
+            observation->compute_normal_matrix();
+            for (int m0 = 0; m0 < this->n_blocks; m0++) {
                 this->N.at(m0) += observation->get_N_blocks().at(m0);
             }
         };
