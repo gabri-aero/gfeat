@@ -201,13 +201,9 @@ public:
                     // Avoid resonant solutions (block observation idx set to
                     // -1)
                     if (block_Akm_i != -1) {
-                        // Compute lower degree limit
-                        int delta = (k - std::max({std::abs(k), m, 2})) % 2 == 0
-                                        ? 0
-                                        : 1;
-                        int l_min = std::max({std::abs(k), m, 2}) + delta;
                         // Lump terms over the degree
-                        for (int l = l_min; l <= this->l_max; l += 2) {
+                        for (int l = this->l_min(m, k); l <= this->l_max;
+                             l += 2) {
                             // Compute Clm, Slm indexing
                             int block_clm_i = this->clm_idx.at(m0)[{l, m}];
                             int block_slm_i = this->slm_idx.at(m0)[{l, m}];
