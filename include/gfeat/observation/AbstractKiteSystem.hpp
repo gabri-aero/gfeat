@@ -129,8 +129,8 @@ public:
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        Logger::instance() << "Block system - parameter initialization: "
-                           << duration.count() * 1e-3 << " s\n";
+        logger << "Block system - parameter initialization: "
+               << duration.count() * 1e-3 << " s\n";
     }
 
     void global_initialization() {
@@ -198,8 +198,8 @@ public:
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        Logger::instance() << "Parameter covariance solved: "
-                           << duration.count() * 1e-3 << " s\n";
+        logger << "Parameter covariance solved: " << duration.count() * 1e-3
+               << " s\n";
     }
     auto &get_Pxx_blocks() { return Pxx; }
     auto &get_N_blocks() { return N; }
@@ -370,8 +370,8 @@ public:
         Eigen::VectorXd A(this->l_max + 1), B(this->l_max + 1);
         // Define latitude loop
         for (int lat_idx = 0; lat_idx < n_lat; lat_idx++) {
-            Logger::instance() << "Propagating covariance: " << lat_idx + 1
-                               << "/" << n_lat << "\r" << std::flush;
+            logger << "Propagating covariance: " << lat_idx + 1 << "/" << n_lat
+                   << "\r" << std::flush;
             // Compute Legendre polynomials
             Plm plm(l_max, colat_vec(lat_idx));
             // Loop over block covariance matrices
@@ -435,8 +435,7 @@ public:
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        Logger::instance() << "Covariance propagated: "
-                           << duration.count() * 1e-3 << "\n";
+        logger << "Covariance propagated: " << duration.count() * 1e-3 << "\n";
         return {lon_mesh, lat_mesh, y.array().sqrt()};
     }
     double synthesis_average(const BaseFunctional &functional) const {
