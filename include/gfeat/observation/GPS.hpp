@@ -25,6 +25,12 @@ public:
         double wo_0 = 0.0)
         : MultiObservation(l_max, Nr, Nd,
                            get_observations(l_max, I, Nr, Nd, we_0, wo_0)) {}
+
+    void set_observation_error(std::function<double(double)> asd) {
+        for (auto &observation : observations) {
+            observation->set_observation_error(asd);
+        }
+    }
 };
 
 #endif // _GPS_HPP_
