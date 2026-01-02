@@ -130,8 +130,8 @@ public:
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        Logger::instance() << "Block system - observation initialization: "
-                           << duration.count() * 1e-3 << " s\n";
+        logger << "Block system - observation initialization: "
+               << duration.count() * 1e-3 << " s\n";
         this->populate_design_matrix();
     }
 
@@ -174,8 +174,8 @@ public:
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        Logger::instance() << "Inclination functions computed: "
-                           << duration.count() * 1e-3 << " s\n";
+        logger << "Inclination functions computed: " << duration.count() * 1e-3
+               << " s\n";
     }
 
     auto &get_Pyy_blocks() { return Pyy; }
@@ -373,10 +373,13 @@ public:
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration =
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        Logger::instance() << "Design matrix populated: "
-                           << duration.count() * 1e-3 << " s\n";
+        logger << "Design matrix populated: " << duration.count() * 1e-3
+               << " s\n";
     }
     double get_radius() const { return r; }
+    double get_I() const { return I; }
+    double get_wo_0() const { return wo_0; }
+    double get_we_0() const { return we_0; }
 
     auto simulate_observations(const GravityField &gravity_field) {
         // Define block parameter and observation vectors
