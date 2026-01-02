@@ -4,7 +4,6 @@
 #include <Eigen/Dense>
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <string>
 
 class Sinex {
@@ -28,33 +27,42 @@ public:
         Eigen::MatrixXd N(n, n);
         int row, col;
         double value;
-        bool normal_equations_flag = false;
 
+        // Skip to start of normal matrix data
         while (getline(file, line)) {
-            if (normal_equations_flag) {
-                // Assign to parameters
-                std::stringstream ss(line);
-                ss >> row >> col >> value;
-                // Map to zero-indexing
-                row--;
-                col--;
-                if (row < n) {
-                    while (!ss.fail() and col < n) {
-                        N.coeffRef(col, row) = value;
-                        N.coeffRef(row, col++) = value;
-                        ss >> value;
-                    }
-                } else {
-                    break;
-                }
-                // Check if normal equation section reached
-            } else {
-                if (line.find("NORMAL_EQUATION_MATRIX") != std::string::npos) {
-                    normal_equations_flag = true;
-                    getline(file, line); // Skip header
-                }
+            if (line.find("NORMAL_EQUATION_MATRIX") != std::string::npos) {
+                getline(file, line);
+                break;
             }
         }
+
+        // Read normal matrix data
+        while (getline(file, line)) {
+            // Check if end of normal matrix reached
+            if (line[0] == '-')
+                break;
+            // Define line data pointer
+            char *p = line.data();
+            // Retrieve row and column attributes
+            row = std::strtol(p, &p, 10);
+            col = std::strtol(p, &p, 10);
+            // Map to zero-indexing
+            row--;
+            col--;
+            // Check normal matrix size not exceeded
+            if (row >= n) {
+                std::cerr << "Normal matrix size exceeded" << std::endl;
+                break;
+            }
+            // Read and assign values
+            while (*p and col < n) {
+                // Only fill lower triangular part
+                value = std::strtod(p, &p);
+                N.coeffRef(col++, row) = value;
+            }
+        }
+        // Now fill upper triangular part
+        N.triangularView<Eigen::Upper>() = N.transpose();
         return N;
     }
 };
