@@ -10,13 +10,9 @@ class Logger {
 private:
     Verbosity verbosity;
     std::mutex mutex_;
-    Logger() { this->set_verbosity(Verbosity::Silent); };
 
 public:
-    static Logger &instance() {
-        static Logger logger;
-        return logger;
-    }
+    Logger() { this->set_verbosity(Verbosity::Silent); };
 
     void set_verbosity(Verbosity verbosity) { this->verbosity = verbosity; }
     Verbosity get_verbosity() const { return this->verbosity; }
@@ -38,5 +34,8 @@ public:
         return *this;
     }
 };
+
+// Global logger
+Logger logger;
 
 #endif // _LOGGER_HPP_

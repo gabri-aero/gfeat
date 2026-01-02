@@ -42,10 +42,9 @@ void init_utils(py::module &m) {
     m.def("rfft", &rfft<double>);
     // Logger
     py::class_<Logger>(m, "Logger")
-        .def_static("instance", &Logger::instance,
-                    py::return_value_policy::reference)
         .def_property("verbosity", &Logger::get_verbosity,
                       &Logger::set_verbosity);
+    m.attr("logger") = &logger;
 
     py::enum_<Verbosity>(m, "Verbosity")
         .value("Silent", Verbosity::Silent)
