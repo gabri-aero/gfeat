@@ -1,6 +1,9 @@
 #ifndef _SPHERICAL_HARMONICS_COVARIANCE_HPP_
 #define _SPHERICAL_HARMONICS_COVARIANCE_HPP_
 
+#define EIGEN_HAS_OPENMP // Force Eigen to see OpenMP
+#include <omp.h>
+
 #include "../utils/Logger.hpp"
 #include "../utils/Sinex.hpp"
 #include "Functionals.hpp"
@@ -25,22 +28,23 @@ public:
         int n = clm_idx(l_max + 1, 0);
         this->Pxx.resize(n, n);
     }
-    void from_normal(std::string filename, double scaling_factor = 1.0) {
+    SphericalHarmonicsCovariance from_normal(std::string filename,
+                                             double scaling_factor = 1.0) {
         auto start = std::chrono::high_resolution_clock::now();
         Sinex sinex(filename);
         auto N = sinex.get_normal_matrix(l_max);
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> s = end - start;
-        Logger::instance() << "Normal matrix loaded in " << s.count()
-                           << " secs \n";
+        logger << "Normal matrix loaded in " << s.count() << " secs \n";
         start = std::chrono::high_resolution_clock::now();
-        this->Pxx =
-            scaling_factor *
-            N.llt().solve(Eigen::MatrixXd::Identity(N.rows(), N.cols()));
+        Eigen::LDLT<Eigen::MatrixXd> ldlt(N);
+        this->Pxx = Eigen::MatrixXd::Identity(N.rows(), N.cols());
+        ldlt.solveInPlace(this->Pxx);
+        this->Pxx *= scaling_factor;
         end = std::chrono::high_resolution_clock::now();
         s = end - start;
-        Logger::instance() << "Normal matrix inverted in " << s.count()
-                           << " secs \n";
+        logger << "Normal matrix inverted in " << s.count() << " secs \n";
+        return *this;
     }
 
     Eigen::MatrixXd get_Pxx() const { return Pxx; }
@@ -101,9 +105,9 @@ public:
         int n = n_lon / 2;
         Eigen::VectorXd A(n + 1), B(n + 1);
         // Define latitude loop
-        Logger::instance() << "Covariance propagation progress" << std::endl;
+        logger << "Covariance propagation progress" << std::endl;
         for (int lat_idx = 0; lat_idx < n_lat; lat_idx++) {
-            Logger::instance() << lat_idx << "/" << n_lat << "\r" << std::flush;
+            logger << lat_idx << "/" << n_lat << "\r" << std::flush;
             // Compute Legendre polynomials
             Plm plm(l_max, M_PI_2 - lat_vec(lat_idx));
             // Loop over covariance rows
@@ -158,8 +162,8 @@ public:
         }
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> s = end - start;
-        Logger::instance() << "Covariance propagation completed in "
-                           << s.count() << " secs \n";
+        logger << "Covariance propagation completed in " << s.count()
+               << " secs \n";
         // Return values
         return {lon_mesh, lat_mesh, y};
     }
