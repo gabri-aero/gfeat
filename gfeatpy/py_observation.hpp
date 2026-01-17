@@ -270,6 +270,16 @@ void init_observation(py::module &m) {
             float
                 Initial planet-centred longitude associated to the Repeating Ground-Track of the observation.
 
+            )doc")
+        .def("get_asd", &BaseObservation::get_asd, R"doc(
+            
+            Getter for the observation error in terms of Amplitude Spectral Denisty (ASD).
+            
+            Return
+            --------
+            Callable[[float], float]
+                ASD function
+
             )doc");
 
     auto line_potential =
