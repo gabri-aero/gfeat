@@ -64,7 +64,9 @@ public:
         std::ifstream file(filename, std::ios::in);
 
         if (!file.is_open()) {
-            std::cerr << "Error: file was not opened!" << std::endl;
+            std::runtime_error("Error: file was not opened!");
+        } else {
+            logger << "File opened: " << filename << std::endl;
         }
 
         std::string line;
@@ -123,8 +125,8 @@ public:
             }
         }
 
+        AOD1BType type;
         while (getline(file, line)) {
-            AOD1BType type;
             if (read_dataset) {
                 std::stringstream ss(line);
                 ss >> l >> m >> Clm >> Slm;
@@ -152,13 +154,13 @@ public:
                 date.s = std::stoi(match[7]);
                 // Get dataset type
                 if (match[8] == "atm") {
-                    type = ATM;
+                    type = AOD1BType::ATM;
                 } else if (match[8] == "ocn") {
-                    type = OCN;
+                    type = AOD1BType::OCN;
                 } else if (match[8] == "glo") {
-                    type = GLO;
+                    type = AOD1BType::GLO;
                 } else if (match[8] == "oba") {
-                    type = OBA;
+                    type = AOD1BType::OBA;
                 }
                 // Reset coefficients data
                 sh.coefficients.setZero();
