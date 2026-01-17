@@ -510,7 +510,36 @@ void init_observation(py::module &m) {
     gps.def(py::init<int, int, int, double, double, double>(), py::arg("l_max"),
             py::arg("Nr"), py::arg("Nd"), py::arg("I"), py::arg("we_0"),
             py::arg("wo_0"))
-        .def("set_observation_error", &GPS::set_observation_error);
+        .def(
+            "set_observation_error",
+            [](GPS &self, double sigma_u, double sigma_v, double sigma_w,
+               std::function<double(double)> ddu_asd,
+               std::function<double(double)> ddv_asd,
+               std::function<double(double)> ddw_asd) {
+                self.set_observation_error(sigma_u, sigma_v, sigma_w, ddu_asd,
+                                           ddv_asd, ddw_asd);
+            },
+            py::arg("sigma_u"), py::arg("sigma_v"), py::arg("sigma_w"),
+            py::arg("ddu_asd"), py::arg("ddv_asd"), py::arg("ddw_asd"),
+            R"doc(
+             Set the observation error for each component of the GPS observation.
+
+             Parameters
+             -----------
+             sigma_u : float
+                 Standard deviation of the radial component
+             sigma_v : float
+                 Standard deviation of the along-track component
+             sigma_w : float
+                 Standard deviation of the cross-track component
+             ddu_asd : Callable[[float], float]
+                 Amplitude spectral density of the radial acceleration
+             ddv_asd : Callable[[float], float]
+                 Amplitude spectral density of the along-track acceleration
+             ddw_asd : Callable[[float], float]
+                 Amplitude spectral density of the cross-track acceleration
+
+             )doc");
 
     auto constellation =
         py::class_<Constellation, MultiObservation,
