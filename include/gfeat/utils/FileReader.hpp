@@ -4,16 +4,17 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 #include <vector>
 
 class FileReader {
-  public:
+public:
     static std::vector<std::vector<std::string>> read(std::string filename,
                                                       char delimiter = ',') {
         std::ifstream file(filename);
 
         if (!file.is_open()) {
-            std::cerr << "Error: file was not opened!" << std::endl;
+            std::runtime_error("Error: file " + filename + " was not opened!");
         }
 
         std::string line;
