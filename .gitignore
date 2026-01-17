@@ -47,3 +47,4 @@ build/
 docs/
 pydocs/_*
 __pycache__/
+.ipynb_checkpoints/
