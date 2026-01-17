@@ -312,7 +312,7 @@ public:
         sigma2_l.setZero();
         for (int l = 2; l <= l_max; l++) {
             // Clm terms
-            for (int m = 1; m <= l; m++) {
+            for (int m = 0; m <= l; m++) {
                 sigma2_l[l] += pow(this->get_sigma_Clm(l, m), 2);
             }
             // Slm terms
