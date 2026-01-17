@@ -376,6 +376,8 @@ public:
     double get_I() const { return I; }
     double get_wo_0() const { return wo_0; }
     double get_we_0() const { return we_0; }
+    double get_wo_dot() const { return wo_dot; }
+    double get_we_dot() const { return we_dot; }
 
     auto simulate_observations(const GravityField &gravity_field) {
         // Define block parameter and observation vectors
@@ -418,9 +420,8 @@ public:
         return output;
     }
 
-    double get_wo_dot() const { return wo_dot; }
-
     double get_df() const { return this->df; }
+    std::function<double(double)> get_asd() const { return this->asd; }
 
     void compute_normal_matrix() override final {
         // Compute weighted normal matrix
