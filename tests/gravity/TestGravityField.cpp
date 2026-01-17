@@ -3,16 +3,19 @@
 
 #include "gtest/gtest.h"
 
-TEST(TestSH, LoadGravityField) {
-    auto sh = GravityField("gravity/static/ITSG-Grace2018s.gfc", 100);
+TEST(TestGravityField, LoadGravityField) {
+    auto sh = GravityField(
+        std::string(DATA_DIR) + "/gravity/static/ITSG-Grace2018s.gfc", 100);
     std::cout << sh.Clm(2, 0) << std::endl;
-    auto sh2 = GravityField("gravity/static/GOCO05c.gfc", 100);
+    auto sh2 = GravityField(
+        std::string(DATA_DIR) + "/gravity/static/GOCO05c.gfc", 100);
     std::cout << sh2.Clm(2, 0) << std::endl;
 }
 
-TEST(TestSH, Potential) {
+TEST(TestGravityField, Potential) {
     int l_max = 90;
-    GravityField gravity_field("gravity/static/GOCO05c.gfc", l_max, l_max);
+    GravityField gravity_field(
+        std::string(DATA_DIR) + "/gravity/static/GOCO05c.gfc", l_max, l_max);
     Eigen::Vector3d r_ecrf(7000e3, 1000e3, 0);
     std::cout << gravity_field.potential(r_ecrf) << std::endl;
     std::cout << gravity_field.mu << std::endl;

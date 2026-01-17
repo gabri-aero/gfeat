@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 
-TEST(TestSH, Load) {
+TEST(TestSphericalHarmonicsCovariance, Load) {
     SphericalHarmonicsCovariance sh_covariance(20);
     sh_covariance.from_normal(
         "gravity/monthly/normals/ITSG-Grace_operational_n96_2024-12.snx");

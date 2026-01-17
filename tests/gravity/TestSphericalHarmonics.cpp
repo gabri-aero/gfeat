@@ -2,8 +2,9 @@
 
 #include "gtest/gtest.h"
 
-TEST(TestSH, GravityTest) {
-    auto sh = GravityField("gravity/static/GOCO05c.gfc", 100);
+TEST(TestSphericalHarmonics, GravityTest) {
+    auto sh = GravityField(
+        std::string(DATA_DIR) + "/gravity/static/GOCO05c.gfc", 100);
     Eigen::Vector3d sph = {7000e3, 1, -1};
     Eigen::Vector3d r_ecrf = sph2cart(sph);
     Eigen::Vector3d r_ecrf_shifted;
@@ -18,8 +19,9 @@ TEST(TestSH, GravityTest) {
     }
 }
 
-TEST(TestSH, GravityGradientCartesianTest) {
-    auto sh = GravityField("gravity/static/GOCO05c.gfc", 100);
+TEST(TestSphericalHarmonics, GravityGradientCartesianTest) {
+    auto sh = GravityField(
+        std::string(DATA_DIR) + "/gravity/static/GOCO05c.gfc", 100);
     Eigen::Vector3d sph = {7000e3, 1, -1};
     Eigen::Vector3d r_ecrf = sph2cart(sph);
     Eigen::Vector3d r_ecrf_shifted, sph_shifted;
@@ -41,8 +43,9 @@ TEST(TestSH, GravityGradientCartesianTest) {
     std::cout << gg_num << std::endl;
 }
 
-TEST(TestSH, Grid) {
-    auto sh = GravityField("gravity/static/GOCO05c.gfc", 3);
+TEST(TestSphericalHarmonics, Grid) {
+    auto sh =
+        GravityField(std::string(DATA_DIR) + "/gravity/static/GOCO05c.gfc", 3);
     auto func = GravityAnomaly();
     auto [lon, lat, ga] = sh.synthesis(6, 4, func);
     std::cout << ga << std::endl;

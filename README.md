@@ -40,10 +40,12 @@ To use the library natively in C++ is currently not recommended given the limita
 
 Some very descriptive examples can be found in [TestConstellation.cpp](https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestConstellation.cpp) and [TestCollinear.cpp](https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestCollinear.cpp). You can build and run all the tests like this.
 ```{make}
-make tests
+mkdir build
+cd build
+cmake ..
+make
+ctest
 ```
-
-The Makefile at the project root can guide you setting up the dependencies for your project.
 
 
 ### References

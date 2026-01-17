@@ -7,7 +7,7 @@
 #include "gtest/gtest.h"
 #include <gfeat>
 
-TEST(TestConstellation, BuildMatrix) {
+TEST(TestConstellation, Solve) {
     int Nr = 31;
     int Nd = 2;
     int Np = 4;
