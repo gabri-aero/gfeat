@@ -131,7 +131,7 @@ def synthesis(base_object, n_lon: int, n_lat: int, functional: BaseFunctional, c
 
 def ground_track(Nr, Nd, I, we_0 = 0, wo_0 = 0, samples_per_rev = 3000, **kwargs):
     """
-    Function to plot any repeating ground track. Generally to be used along with plot_synthesis to observe ground-track correlation
+    Function to plot any repeating ground track. Generally to be used along with :func:`gfeatpy.plotting.synthesis` to observe ground-track correlation
 
     :param Nr: Number of revolutions
     :param Nd: Nodal days
