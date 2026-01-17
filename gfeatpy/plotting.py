@@ -9,7 +9,7 @@ from gfeatpy.utils import ma_dot, raan_dot, aop_dot, sma_from_rgt
 from gfeatpy import planet
     
 
-def plot_pyramid_coefficients(base_object, colormap='jet'):
+def pyramid(base_object, colormap='jet'):
     """
     Function to plot the SH coefficients in a pyramid format.
     
@@ -28,7 +28,7 @@ def plot_pyramid_coefficients(base_object, colormap='jet'):
     return im
     
     
-def plot_synthesis(base_object, n_lon: int, n_lat: int, functional: BaseFunctional, colormap = 'seismic', z_max: float = None):
+def synthesis(base_object, n_lon: int, n_lat: int, functional: BaseFunctional, colormap = 'seismic', z_max: float = None):
     """
     Plot the global SH synthesis on an Earth map.
     (To DO: add option to remove Earth map background)
@@ -129,7 +129,7 @@ def plot_synthesis(base_object, n_lon: int, n_lat: int, functional: BaseFunction
     return base_synthesis(lon, lat, z, functional, z_max)
 
 
-def plot_ground_track(Nr, Nd, I, we_0 = 0, wo_0 = 0, samples_per_rev = 3000, **kwargs):
+def ground_track(Nr, Nd, I, we_0 = 0, wo_0 = 0, samples_per_rev = 3000, **kwargs):
     """
     Function to plot any repeating ground track. Generally to be used along with plot_synthesis to observe ground-track correlation
 
@@ -168,17 +168,22 @@ def plot_ground_track(Nr, Nd, I, we_0 = 0, wo_0 = 0, samples_per_rev = 3000, **k
     plt.scatter(lon, lat, **kwargs)
 
 
-class PlotterSpectrumRMS:
+class DegreeAmplitudePlotter:
     """
     Class to plot the RMS per coefficient per degree spectrum
 
     It allows for adding as many objects as needed with a lot
     of flexibility for formatting
-
-    Attributes:
-        figsize (Sequence[float]): matplotlib figure size
     """
     def __init__(self, figsize, functional: BaseFunctional = None):
+        """
+        Constructor for DegreeAmplitudePlotter class.
+
+        :param figsize: matplotlib figure size
+        :type figsize: tuple
+        :param functional: BaseFunctional object to scale be applied to the RMS values
+        :type functional: BaseFunctional
+        """
         self.f = (
             (lambda l: np.ones_like(l))
             if functional is None 
@@ -202,6 +207,14 @@ class PlotterSpectrumRMS:
         self.ax.set_ylabel(f"{name} {unit}")
 
     def add_item(self, object, *args, show_error = None, **kwargs):
+        """
+        Add an item to the degree amplitude plot.
+        
+        :param object: Any object containing SH coefficients or errors
+        :param args: Additional positional arguments to be passed to ax.semilogy
+        :param show_error: A boolean to indicate whether to plot the error (True) or the signal (False). If None, the signal is plotted by default.
+        :param kwargs: Additional keyword arguments to be passed to ax.semilogy
+        """
         # Distinguish between plotting error and signal power
         if show_error is None:
             s = object.rms_per_coefficient_per_degree()
@@ -213,6 +226,9 @@ class PlotterSpectrumRMS:
         self.ax.semilogy(l, s, *args, **kwargs)
 
     def show():
+        """
+        Wrapper for show method
+        """
         plt.show()
 
 
