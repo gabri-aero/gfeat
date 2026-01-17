@@ -45,27 +45,6 @@ def synthesis(base_object, n_lon: int, n_lat: int, functional: BaseFunctional, c
     :param z_max: Cutting value for the color scale
     :type z_max: float
     """
-    def adjust_colorbar_ticks(cb):
-        # Define range
-        vmin, vmax = cb.mappable.get_clim()
-        range = vmax - vmin
-        # Set order of magnitudes
-        order = 10 ** np.floor(np.log10(range/4))
-        # Set step as an integer
-        for factor in [1, 2, 5, 10]:
-            step = order * factor
-            num_ticks = (vmax - vmin) / step
-            if 3 <= num_ticks <= 10:
-                break
-        # Generate ticks
-        tick_start = np.ceil(vmin / step) * step
-        tick_end   = np.floor(vmax / step) * step
-        ticks = np.arange(tick_start, tick_end + step/2, step)
-        # Apply ticks
-        cb.set_ticks(ticks)
-        ticks[np.abs(ticks) < 1e-10] = 0
-        cb.set_ticklabels([f'{t:g}' for t in ticks])
-
 
     def base_synthesis(lon, lat, z, functional, z_max):
         # Define plot settings based on synthesis functional type
@@ -106,27 +85,50 @@ def synthesis(base_object, n_lon: int, n_lat: int, functional: BaseFunctional, c
         # Set up colorbar
         cbar = plt.colorbar(contour, ax=ax, shrink=0.5)
         cbar.set_label(clabel)
-        adjust_colorbar_ticks(cbar)
+        _adjust_colorbar_ticks(cbar)
         # For nice display -> tight layout
         plt.tight_layout()
         # Return contour and colorbar objects to allow for further modification
         return contour, cbar
-    
-    def get_basemap_axes():
-        # Define projection
-        ax = plt.axes(projection=ccrs.PlateCarree())
-        # Add continents coastline as background
-        ax.add_feature(cfeature.COASTLINE, linewidth=0.7)
-        # Set up axes
-        ax.set_xlabel('Longitude [deg]')
-        ax.set_ylabel('Latitude [deg]')
-        ax.set_yticks(np.linspace(-90, 90, 7))
-        ax.set_xticks(np.linspace(-180, 180, 13))
-        return ax
 
-    get_basemap_axes()
+    _get_basemap_axes()
     [lon, lat, z] = base_object.synthesis(n_lon, n_lat, functional)
     return base_synthesis(lon, lat, z, functional, z_max)
+
+
+def _get_basemap_axes():
+    # Define projection
+    ax = plt.axes(projection=ccrs.PlateCarree())
+    # Add continents coastline as background
+    ax.add_feature(cfeature.COASTLINE, linewidth=0.7)
+    # Set up axes
+    ax.set_xlabel('Longitude [deg]')
+    ax.set_ylabel('Latitude [deg]')
+    ax.set_yticks(np.linspace(-90, 90, 7))
+    ax.set_xticks(np.linspace(-180, 180, 13))
+    return ax
+
+
+def _adjust_colorbar_ticks(cb):
+    # Define range
+    vmin, vmax = cb.mappable.get_clim()
+    range = vmax - vmin
+    # Set order of magnitudes
+    order = 10 ** np.floor(np.log10(range/4))
+    # Set step as an integer
+    for factor in [1, 2, 5, 10]:
+        step = order * factor
+        num_ticks = (vmax - vmin) / step
+        if 3 <= num_ticks <= 10:
+            break
+    # Generate ticks
+    tick_start = np.ceil(vmin / step) * step
+    tick_end   = np.floor(vmax / step) * step
+    ticks = np.arange(tick_start, tick_end + step/2, step)
+    # Apply ticks
+    cb.set_ticks(ticks)
+    ticks[np.abs(ticks) < 1e-10] = 0
+    cb.set_ticklabels([f'{t:g}' for t in ticks])
 
 
 def ground_track(Nr, Nd, I, we_0 = 0, wo_0 = 0, samples_per_rev = 3000, **kwargs):
