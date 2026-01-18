@@ -1,0 +1,7 @@
+Sphinx==8.2.3
+sphinx-autodoc-typehints==3.5.2
+nbsphinx==0.9.8
+enum-tools==0.13.0
+sphinx-toolbox==4.0.0
+furo==2025.12.19
+gfeatpy
