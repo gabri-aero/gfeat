@@ -1,0 +1,7 @@
+.nbsphinx-gallery > a > div:first-child {
+    align-items: center !important;
+}
+
+.toc-tree ul ul ul {
+    display: none;
+}
