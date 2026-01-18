@@ -5,3 +5,4 @@ enum-tools==0.13.0
 sphinx-toolbox==4.0.0
 furo==2025.12.19
 gfeatpy
+ipython==8.37.0
