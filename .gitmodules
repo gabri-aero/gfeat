@@ -4,3 +4,6 @@
 [submodule "external/fft"]
 	path = external/fft
 	url = https://github.com/gabri-aero/fft
+[submodule "external/eigen"]
+	path = external/eigen
+	url = https://gitlab.com/libeigen/eigen.git

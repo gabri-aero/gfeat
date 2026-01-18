@@ -28,9 +28,9 @@ set(CPP_TARGET gfeat)
 add_library(${CPP_TARGET} SHARED ${SOURCES})
 set_target_properties(${CPP_TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 add_compile_options(-march=native -ffast-math)  # -O3 might be unsuitable for debugging
+target_include_directories(${CPP_TARGET} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/external/eigen)
 
 # Setup external libraries
-find_package(Eigen3 REQUIRED)
 
 if(BUILD_CPP_TESTS)
 enable_testing()
@@ -50,10 +50,9 @@ endif()
 
 # Build python wrapper _core
 if(BUILD_GFEATPY)
-find_package(pybind11 REQUIRED)
-find_package(Eigen3 REQUIRED)
-find_package(Python3 REQUIRED)
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+set(PYBIND11_FINDPYTHON ON)
+find_package(pybind11 CONFIG REQUIRED)
 set(PYTHON_SITE_PACKAGES_DIR ${Python3_SITE_PACKAGES})
 
 # Define the Python library generated from C++
@@ -69,7 +68,6 @@ set_target_properties(_core PROPERTIES
 
 # Link 
 target_include_directories(_core PRIVATE ${PROJECT_ROOT})
-target_include_directories(_core PRIVATE ${EIGEN3_INCLUDE_DIR})
 target_link_libraries(_core PRIVATE pybind11::headers)
 
 # OpenMP setup

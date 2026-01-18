@@ -7,6 +7,7 @@ foreach(TEST_FILE ${TEST_FILES})
     target_link_libraries(${TEST_FILE_NAME} PRIVATE ${CPP_TARGET} GTest::gtest_main)
     target_include_directories(${TEST_FILE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/external/fft)
     target_include_directories(${TEST_FILE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/external/functions)
+    target_include_directories(${CPP_TARGET} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/external/eigen)
     target_include_directories(${TEST_FILE_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
     set_target_properties(${TEST_FILE_NAME} PROPERTIES
     INSTALL_RPATH "$ORIGIN"
