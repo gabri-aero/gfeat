@@ -1,0 +1,1582 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Examples" href="examples.html"><link rel="prev" title="API reference" href="api.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Planet object - GFEAT documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=51e56037" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">GFEAT  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">GFEAT  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="api.html">API reference</a><input aria-label="Toggle navigation of API reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Planet object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gravity-module">Gravity module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#observation-module">Observation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting-module">Plotting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gfeatpy.utils">Utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/gravity-field-data/static.html">Static gravity field data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/gravity-field-data/monthly.html">GRACE gravity field solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/gravity-field-data/normals.html">GRACE normals processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/gravity-field-data/aod1b.html">AOD1B data product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/single-pair/sensitivity.html">Sensitivity analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/single-pair/matrix-structure.html">Normal matrix structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/single-pair/regularized.html">Regularized solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/single-pair/grace.html">GRACE simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/single-pair/grace-resonant.html">GRACE 2004-Sep resonance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/single-pair/ground-track-analysis.html">Repeating ground-track analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/multiple-pair/bender.html">Bender configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/multiple-pair/longitude-policy.html">Longitude policy</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/gfeatpy.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-gfeatpy">
+<span id="planet-object"></span><h1>Planet object<a class="headerlink" href="#module-gfeatpy" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.Planet">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.</span></span><span class="sig-name descname"><span class="pre">Planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gfeatpy.Planet" title="gfeatpy._core.Planet"><span class="pre">gfeatpy._core.Planet</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.Planet" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>This class defines a global variable that stores the properties of the central body that is under analysis</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.Planet.C20">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">C20</span></span><a class="headerlink" href="#gfeatpy.Planet.C20" title="Link to this definition">¶</a></dt>
+<dd><p>Unnormalized flattening coefficient</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.Planet.ae">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ae</span></span><a class="headerlink" href="#gfeatpy.Planet.ae" title="Link to this definition">¶</a></dt>
+<dd><p>Equatorial radius, or Brillouin sphere [m]</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.Planet.mu">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu</span></span><a class="headerlink" href="#gfeatpy.Planet.mu" title="Link to this definition">¶</a></dt>
+<dd><p>Standard gravitational parameter [m³/s²]</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.Planet.rho_e">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rho_e</span></span><a class="headerlink" href="#gfeatpy.Planet.rho_e" title="Link to this definition">¶</a></dt>
+<dd><p>Mean crustal density [kg/m³]</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.Planet.rho_w">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rho_w</span></span><a class="headerlink" href="#gfeatpy.Planet.rho_w" title="Link to this definition">¶</a></dt>
+<dd><p>Water density at Sea Level for EWH [kg/m³]</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.Planet.theta_dot">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">theta_dot</span></span><a class="headerlink" href="#gfeatpy.Planet.theta_dot" title="Link to this definition">¶</a></dt>
+<dd><p>Angular rotational velocity [rad/s]</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gfeatpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">planet</span>    <span class="c1"># mind the lower case</span>
+
+<span class="c1"># Asign central planetary body constants to Mars</span>
+<span class="n">planet</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="mf">42.83e12</span>
+<span class="n">planet</span><span class="o">.</span><span class="n">ae</span> <span class="o">=</span> <span class="mf">3396.2e3</span>
+<span class="n">planet</span><span class="o">.</span><span class="n">C20</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1960.45e-6</span>
+<span class="n">planet</span><span class="o">.</span><span class="n">theta_dot</span> <span class="o">=</span> <span class="mf">7.088e-5</span>
+<span class="n">planet</span><span class="o">.</span><span class="n">rho_e</span> <span class="o">=</span> <span class="mi">2582</span>
+</pre></div>
+</div>
+</section>
+<section id="gravity-module">
+<h1>Gravity module<a class="headerlink" href="#gravity-module" title="Link to this heading">¶</a></h1>
+<p>The gravity module provides different tools to handle gravity field data.</p>
+<p id="module-gfeatpy.gravity">Gravity submodule</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1B">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">AOD1B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.AOD1B</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.AOD1B" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1B.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.AOD1B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.DateTime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.AOD1BType</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1B.get" title="Link to this definition">¶</a></dt>
+<dd><p>Function that retrieves the <a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics" title="gfeatpy.gravity.SphericalHarmonics"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SphericalHarmonics</span></code></a> object associated to the AOD1B
+set indicated by the input parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datetime</strong> (<a class="reference internal" href="#gfeatpy.gravity.DateTime" title="gfeatpy.gravity.DateTime"><em>DateTime</em></a>) – Epoch associated to the solution (note that they are provided every 3h).</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="#gfeatpy.gravity.AOD1BType" title="gfeatpy.gravity.AOD1BType"><em>AOD1BType</em></a>) – Stokes coefficient set type from the four different possibilities provided.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Object containing the associated Stokes coefficients.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics" title="gfeatpy.gravity.SphericalHarmonics">SphericalHarmonics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1B.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.AOD1B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gfeatpy._core.gravity.AOD1B</span></span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1B.load" title="Link to this definition">¶</a></dt>
+<dd><p>Function that loads an AOD1B daily .asc file into the AOD1B class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – Path to AOD1B .asc file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>AOD1B object with loaded data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gfeatpy.gravity.AOD1B" title="gfeatpy.gravity.AOD1B">AOD1B</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class enum">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1BType">
+<em class="property"><span class="k"><span class="pre">enum</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">AOD1BType</span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1BType" title="Link to this definition">¶</a></dt>
+<dd><p>Enumeration that defines the Stokes coefficients set to be retrieved from AOD1B data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1BType.ATM">
+<span class="sig-name descname"><span class="pre">ATM</span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1BType.ATM" title="Link to this definition">¶</a></dt>
+<dd><p>Difference between vertically integrated density of the atmosphere and the corresponding mean field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1BType.OCN">
+<span class="sig-name descname"><span class="pre">OCN</span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1BType.OCN" title="Link to this definition">¶</a></dt>
+<dd><p>Difference between the water column contribution to ocean bottom pressure and the corresponding mean field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1BType.GLO">
+<span class="sig-name descname"><span class="pre">GLO</span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1BType.GLO" title="Link to this definition">¶</a></dt>
+<dd><p>Sum of ATM and OCN mass anomalies.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gfeatpy.gravity.AOD1BType.OBA">
+<span class="sig-name descname"><span class="pre">OBA</span></span><a class="headerlink" href="#gfeatpy.gravity.AOD1BType.OBA" title="Link to this definition">¶</a></dt>
+<dd><p>Sum of the water column contribution to the ocean bottom pressure anomalies (OCN)
+and the atmospheric contribution to ocean bottom pressure anomalies.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.BaseFunctional">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">BaseFunctional</span></span><a class="headerlink" href="#gfeatpy.gravity.BaseFunctional" title="Link to this definition">¶</a></dt>
+<dd><p>BaseFunctional is an abstract class that serves as parent class to implement
+different gravity field functionals. For this purpose, it contains a function
+<code class="docutils literal notranslate"><span class="pre">degree_dependent_factor</span></code> that is overloaded by the child classes.</p>
+<p>It is employed internally in both the Global Spherical Harmonics Synthesis
+and the computation of degree variances. This allows for code modularity
+and simplifies the implementation of the different functionals.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.DateTime">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">DateTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.DateTime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.DateTime" title="Link to this definition">¶</a></dt>
+<dd><p>Class that defines date and time from calendar format.</p>
+<p>Constructor for DateTime object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> (<em>int</em>)</p></li>
+<li><p><strong>month</strong> (<em>int</em>)</p></li>
+<li><p><strong>day</strong> (<em>int</em>)</p></li>
+<li><p><strong>hours</strong> (<em>int</em>)</p></li>
+<li><p><strong>minutes</strong> (<em>int</em>)</p></li>
+<li><p><strong>seconds</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.EquivalentWaterHeight">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">EquivalentWaterHeight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.EquivalentWaterHeight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.EquivalentWaterHeight" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFunctional</span></code></a></p>
+<p>EquivalentWaterHeight class defines the degree common terms for computation of EWH
+(Wahr, 1998).</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(l) = \frac{a_e \rho_c W_l}{3 \rho_w} \frac{2l+1}{1+k_l'}\]</div>
+</div>
+<p>The class also include the possibility to apply Gaussian smoothing with an
+input smoothing radius (Jekeli, 1981). The computation of the SH coefficients of
+the averaging function <span class="math notranslate nohighlight">\(W_l\)</span> follows the continuous fraction approach proposed by
+Piretzidis (2019).</p>
+<dl class="simple">
+<dt>Inherits from:</dt><dd><p>BaseFunctional</p>
+</dd>
+</dl>
+<p>Constructor for EquivalentWaterHeight.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>smoothing_radius</strong> (<em>float</em>) – Value at which the Gaussian spatial smoothing kernel decays to 1/2 of the
+initial value.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Create an instance with 200 km smoothing radius:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ewh</span> <span class="o">=</span> <span class="n">EquivalentWaterHeight</span><span class="p">(</span><span class="mf">200e3</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.GeoidHeight">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">GeoidHeight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.GeoidHeight</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.GeoidHeight" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFunctional</span></code></a></p>
+<p>GeoidHeight class defines the degree common terms for computation of geoid height.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(l) = a_e\]</div>
+</div>
+<p>Constructor for GeoidHeight.</p>
+<p class="rubric">Example</p>
+<p>Create a BaseFunctional instance for geoid heights:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">geoid_height</span> <span class="o">=</span> <span class="n">GeoidHeight</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.GravityAnomaly">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">GravityAnomaly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.GravityAnomaly</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.GravityAnomaly" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFunctional</span></code></a></p>
+<p>GravityAnomaly class defines the degree common terms for computation of gravity anomalies
+(in milligals).</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(l) = 10^5 \frac{\mu}{a_e^2} (l-1)\]</div>
+</div>
+<p>Constructor for GravityAnomaly.</p>
+<p class="rubric">Example</p>
+<p>Create a BaseFunctional instance for gravity anomalies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gravity_anomaly</span> <span class="o">=</span> <span class="n">GravityAnomaly</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.GravityField">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">GravityField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.GravityField</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.GravityField" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics" title="gfeatpy.gravity.SphericalHarmonics"><code class="xref py py-class docutils literal notranslate"><span class="pre">SphericalHarmonics</span></code></a></p>
+<p>This is a derived class from <a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics" title="gfeatpy.gravity.SphericalHarmonics"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SphericalHarmonics</span></code></a> that includes functionality
+to load data from .gfc files (see <a class="reference external" href="https://icgem.gfz-potsdam.de/">ICGEM website</a>).</p>
+<p>Contructor for GravityField object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.GravityField.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.GravityField</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gfeatpy._core.gravity.GravityField</span></span></span><a class="headerlink" href="#gfeatpy.gravity.GravityField.load" title="Link to this definition">¶</a></dt>
+<dd><p>This function loads gravity field data from a .gfc file into this object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – Path to .gfc file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Object with loaded gravity field.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gfeatpy.gravity.GravityField" title="gfeatpy.gravity.GravityField">GravityField</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">SphericalHarmonics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics" title="Link to this definition">¶</a></dt>
+<dd><p>This class stores Spherical Harmonics coefficients data and provides utilities to
+process it. Data is loaded through auxiliar objects such as <a class="reference internal" href="#gfeatpy.gravity.GravityField" title="gfeatpy.gravity.GravityField"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GravityField</span></code></a> or <a class="reference internal" href="#gfeatpy.gravity.AOD1B" title="gfeatpy.gravity.AOD1B"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AOD1B</span></code></a>.</p>
+<p>Contructor for SphericalHarmonics object.
+The constructor only defines the internal storing structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.coefficients">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coefficients</span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.coefficients" title="Link to this definition">¶</a></dt>
+<dd><p>This property points to the (L+1)x(L+1) dense matrix storing the SH coefficients. The matrix
+structure is as follows.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\Sigma_{xx} = \begin{bmatrix}
+    \bar{C}_{00} &amp; \bar{S}_{11} &amp; \cdots &amp; \bar{S}_{L1} \\
+    \bar{C}_{10} &amp; \bar{C}_{11} &amp; \cdots &amp; \bar{S}_{L2} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \bar{C}_{L0} &amp; \bar{C}_{L1} &amp; \cdots &amp; \bar{C}_{LL}
+\end{bmatrix}\end{split}\]</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.degree_variance">
+<span class="sig-name descname"><span class="pre">degree_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sigmas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.degree_variance" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes degree variance spectrum from the values
+of the SH coefficients.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_l^2 = \sum_{m=0}^{l} \bar{C}_{lm}^2 + \bar{S}_{lm}^2\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>use_sigmas</strong> (<em>bool</em>) – Flag to indicate if the standard deviations are used instead of the coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.gravity">
+<span class="sig-name descname"><span class="pre">gravity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_ecef</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.gravity" title="Link to this definition">¶</a></dt>
+<dd><p>Function that evaluates the gravity vector in the Earth-Centered-Earth-Fixed frame (ECEF).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r_ecef</strong> (<em>numpy.ndarray</em>) – 3D position in the ECEF frame.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>3D gravity vector in the ECEF frame.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.potential">
+<span class="sig-name descname"><span class="pre">potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_ecef</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.potential" title="Link to this definition">¶</a></dt>
+<dd><p>Function that evaluates gravity field perturbing potential in the Earth-Centered-Earth-Fixed (ECEF) frame .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r_ecef</strong> (<em>numpy.ndarray</em>) – 3D position in the ECEF frame.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gravity field perturbing potential.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.rms_per_coefficient_per_degree">
+<span class="sig-name descname"><span class="pre">rms_per_coefficient_per_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sigmas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.rms_per_coefficient_per_degree" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes RMS per coefficient per degree from the values
+of the SH coefficients.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\delta_l = \sqrt{\sum_{m=0}^{l} \frac{\bar{C}_{lm}^2 + \bar{S}_{lm}^2}{2l+1}}\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>use_sigmas</strong> (<em>bool</em>) – Flag to indicate if the standard deviations are used instead of the coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.sigmas">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sigmas</span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.sigmas" title="Link to this definition">¶</a></dt>
+<dd><p>This property points to the (L+1)x(L+1) dense matrix storing the standard deviations of the
+SH coefficients. The matrix structure is equivalent to <a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.coefficients" title="gfeatpy.gravity.SphericalHarmonics.coefficients"><code class="xref py py-attr docutils literal notranslate"><span class="pre">coefficients</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonics.synthesis">
+<span class="sig-name descname"><span class="pre">synthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.BaseFunctional</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonics.synthesis" title="Link to this definition">¶</a></dt>
+<dd><p>This function performs Global Spherical Harmonics Synthesis according to the
+input gravity field functional.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[y(\lambda, \phi) = \sum_{l=2}^{L} \sum_{m=0}^{l} f(l) \bar{P}_{lm}(\sin{\phi}) (\bar{C}_{lm} \cos{m\lambda} + \bar{S}_{lm} \sin{m\lambda})\]</div>
+</div>
+<p>It makes use of the two-step fold proposed by Rizos (1979) as well as the FFT for efficient computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_lon</strong> (<em>int</em>) – Number of nodes along the longitude direction.</p></li>
+<li><p><strong>n_lat</strong> (<em>int</em>) – Number of nodes along the latitude direction.</p></li>
+<li><p><strong>functional</strong> (<a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><em>BaseFunctional</em></a>) – Gravity field functional to perform the synthesis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>numpy.ndarray</em> – A 2D array with longitude values for the lon/lat grid.</p></li>
+<li><p><em>numpy.ndarray</em> – A 2D array with latitude values for lon/lat grid.</p></li>
+<li><p><em>numpy.ndarray</em> – A 2D array with functional values on the lon/lat grid.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonicsCovariance">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">SphericalHarmonicsCovariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonicsCovariance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonicsCovariance" title="Link to this definition">¶</a></dt>
+<dd><p>This class stores the full covariance matrix from a gravity field solution and provides utilities
+to process it.</p>
+<p>Constructor for SphericalHarmonicsCovariance object.
+The constructor only defines the inner structure of the matrix. Data can be load through different
+loading functions depending on the file type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonicsCovariance.Pxx">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Pxx</span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.Pxx" title="Link to this definition">¶</a></dt>
+<dd><p>Attribute that stores the full covariance matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonicsCovariance.degree_variance">
+<span class="sig-name descname"><span class="pre">degree_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonicsCovariance</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.degree_variance" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes degree variance spectrum from the standard deviation
+of the SH coefficients.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_l^2 = \sum_{m=0}^{l} \sigma^2(\bar{C}_{lm}) + \sigma^2(\bar{S}_{lm})\]</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonicsCovariance.from_normal">
+<span class="sig-name descname"><span class="pre">from_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonicsCovariance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gfeatpy._core.gravity.SphericalHarmonicsCovariance</span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.from_normal" title="Link to this definition">¶</a></dt>
+<dd><p>Function to fill the SH covariance matrix through inversion of the normal matrix as provided
+by an input Sinex file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>string</em>) – Path to Sinex file that contains the normal matrix.</p></li>
+<li><p><strong>scaling_factor</strong> (<em>float</em>) – Scaling factor to be applied to the normal matrix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonicsCovariance.rms_per_coefficient_per_degree">
+<span class="sig-name descname"><span class="pre">rms_per_coefficient_per_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonicsCovariance</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.rms_per_coefficient_per_degree" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes RMS per coefficient per degree from the standard deviation
+of the SH coefficients.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\delta_l = \sqrt{\sum_{m=0}^{l} \frac{\sigma^2(\bar{C}_{lm}) + \sigma^2(\bar{S}_{lm})}{2l+1}}\]</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.gravity.SphericalHarmonicsCovariance.synthesis">
+<span class="sig-name descname"><span class="pre">synthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.SphericalHarmonicsCovariance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.BaseFunctional</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.synthesis" title="Link to this definition">¶</a></dt>
+<dd><p>This function performs covariance propagation from the SH covariance into the sphere according to the
+input gravity field functional.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_{y}(\lambda, \phi) = v P_{xx} v^T\]</div>
+</div>
+<p>It makes use of the two-step fold proposed by Rizos (1979) as well as the FFT for efficient computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_lon</strong> (<em>int</em>) – Number of nodes along the longitude direction.</p></li>
+<li><p><strong>n_lat</strong> (<em>int</em>) – Number of nodes along the latitude direction.</p></li>
+<li><p><strong>functional</strong> (<a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><em>BaseFunctional</em></a>) – Gravity field functional to perform the synthesis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>numpy.ndarray</em> – A 2D array with longitude values for the lon/lat grid.</p></li>
+<li><p><em>numpy.ndarray</em> – A 2D array with latitude values for lon/lat grid.</p></li>
+<li><p><em>numpy.ndarray</em> – A 2D array with the commission error values for
+the input functional on the lon/lat grid.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="observation-module">
+<h1>Observation module<a class="headerlink" href="#observation-module" title="Link to this heading">¶</a></h1>
+<p>The observation module handles the computation of the spectral observations. For this purpose, different functionalities
+are defined in abstract objects and inherited towards the actual usable observation classes.</p>
+digraph inheritance8af429003f {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;AbstractKiteSystem&quot; [URL=&quot;#gfeatpy.observation.AbstractKiteSystem&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;AbstractKiteSystem class defines the base object that handles the block-kite structure &quot;];
+  &quot;AlongTrack&quot; [URL=&quot;#gfeatpy.observation.AlongTrack&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class defines the position displacement observation in the along-track&quot;];
+  &quot;BaseObservation&quot; -&gt; &quot;AlongTrack&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;BaseObservation&quot; [URL=&quot;#gfeatpy.observation.BaseObservation&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;BaseObservation class defines the base object for any observation along a circular orbit.&quot;];
+  &quot;AbstractKiteSystem&quot; -&gt; &quot;BaseObservation&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Constellation&quot; [URL=&quot;#gfeatpy.observation.Constellation&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class wraps the :attr:`~gfeatpy.observation.MultiObservation` class to handle&quot;];
+  &quot;MultiObservation&quot; -&gt; &quot;Constellation&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;CrossTrack&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;This class defines the position displacement observation in the cross-track&quot;];
+  &quot;BaseObservation&quot; -&gt; &quot;CrossTrack&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;GPS&quot; [URL=&quot;#gfeatpy.observation.GPS&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;];
+  &quot;MultiObservation&quot; -&gt; &quot;GPS&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;MultiObservation&quot; [URL=&quot;#gfeatpy.observation.MultiObservation&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class takes a list of attr:`~gfeatpy.observation.BaseObservation` objects to compute &quot;];
+  &quot;AbstractKiteSystem&quot; -&gt; &quot;MultiObservation&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Potential&quot; [URL=&quot;#gfeatpy.observation.Potential&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class defines the perturbing potential observation for a circular orbit.&quot;];
+  &quot;BaseObservation&quot; -&gt; &quot;Potential&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Radial&quot; [URL=&quot;#gfeatpy.observation.Radial&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class defines the position displacement observation in the radial&quot;];
+  &quot;BaseObservation&quot; -&gt; &quot;Radial&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Range&quot; [URL=&quot;#gfeatpy.observation.Range&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;];
+  &quot;BaseObservation&quot; -&gt; &quot;Range&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>The observations require the definition of different orbital elements which are relative to the Earth frame as depicted below.</p>
+<a class="reference internal image-reference" href="_images/orbital-elements.jpg"><img alt="Orbital elements figure" src="_images/orbital-elements.jpg" style="width: 400px;" />
+</a>
+<dl class="py class" id="module-gfeatpy.observation">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">AbstractKiteSystem</span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem" title="Link to this definition">¶</a></dt>
+<dd><p>AbstractKiteSystem class defines the base object that handles the block-kite structure
+of the linear system of equations along a circular repeating ground-track.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.degree_variance">
+<span class="sig-name descname"><span class="pre">degree_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.degree_variance" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes degree variance spectrum from the standard deviation of the SH coefficients.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_l^2 = \sum_{m=0}^{l} \sigma^2(C_{lm}) + \sigma^2(S_{lm})\]</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.get_N">
+<span class="sig-name descname"><span class="pre">get_N</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.get_N" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for full normal matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full normal matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.get_Pxx">
+<span class="sig-name descname"><span class="pre">get_Pxx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.get_Pxx" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for full parameter covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full parameter covariance matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.get_sigma_x">
+<span class="sig-name descname"><span class="pre">get_sigma_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.get_sigma_x" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the compact matrix storing the standard deviation of the parameters, the SH coefficients. See
+<a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.coefficients" title="gfeatpy.gravity.SphericalHarmonics.coefficients"><code class="xref py py-attr docutils literal notranslate"><span class="pre">coefficients</span></code></a> for the matrix structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.rms_per_coefficient_per_degree">
+<span class="sig-name descname"><span class="pre">rms_per_coefficient_per_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.rms_per_coefficient_per_degree" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes RMS per coefficient per degree from the standard deviation
+of the SH coefficients.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\delta_l = \sqrt{\sum_{m=0}^{l} \frac{\sigma^2(C_{lm}) + \sigma^2(S_{lm})}{2l+1}}\]</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.set_kaula_regularization">
+<span class="sig-name descname"><span class="pre">set_kaula_regularization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.set_kaula_regularization" title="Link to this definition">¶</a></dt>
+<dd><p>This function introduces Kaula’s rule to solve the linear system. It provides a constraint on the
+standard deviation of the parameters as defined by Kaula’s power rule:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma\{\bar{C}_{lm}, \bar{S}_{lm}\} = \frac{K}{l^2}\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>K</strong> (<em>float</em>) – Kaula’s constant for the empirical Kaula’s rule”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.set_solution_time_window">
+<span class="sig-name descname"><span class="pre">set_solution_time_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.set_solution_time_window" title="Link to this definition">¶</a></dt>
+<dd><p>Setter for the time window <span class="math notranslate nohighlight">\(T\)</span> of data accumulation that contributes to a gravity field solution.
+It is therefore the sampling time of the gravity field. It defines the frequency resolution <span class="math notranslate nohighlight">\(\Delta f=1/T\)</span>
+that is employed to compute the error in the lumped coefficients from the amplitude spectral density.</p>
+<p>By default, the solution time window  is set to the repeatability period of the ground-track.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time_window</strong> (<em>float</em>) – Solution time window in days.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that when there is not a commensurability with the ground-track repeatability time, the solutions might
+be inaccurate, since the periodicity of the orbit is not fulfilled. Solutions with a time window lower than
+the ground-track repeatability time are highly unrecommended.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.solve" title="Link to this definition">¶</a></dt>
+<dd><p>This function solves for the parameter covariance <span class="math notranslate nohighlight">\(P_{xx}\)</span> making use of least squares
+error propagation.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[P_{xx} = (H^T P_{yy}^{-1} H + P_{cc}^{-1})^{-1}\]</div>
+</div>
+<p>Cholesky decomposition allows for leveraging the symmetry of the normal matrix for efficient
+inversion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.synthesis">
+<span class="sig-name descname"><span class="pre">synthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><span class="pre">BaseFunctional</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.synthesis" title="Link to this definition">¶</a></dt>
+<dd><p>This function performs covariance propagation from the parameter covariance into the sphere according to the
+input gravity field functional.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_{y}(\lambda, \phi) = v P_{xx} v^T\]</div>
+</div>
+<p>It makes use of the two-step fold proposed by Rizos (1979) for efficient computation.
+It does not use FFT since the sparsity of the design and parameter covariance matrices makes it
+less efficient than summation along the dense blocks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_lon</strong> (<em>int</em>) – Number of nodes along the longitude direction.</p></li>
+<li><p><strong>n_lat</strong> (<em>int</em>) – Number of nodes along the latitude direction.</p></li>
+<li><p><strong>functional</strong> (<a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><em>BaseFunctional</em></a>) – Gravity field functional to perform the synthesis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>numpy.ndarray</em> – A 2D array with longitude values for the lon/lat grid.</p></li>
+<li><p><em>numpy.ndarray</em> – A 2D array with latitude values for lon/lat grid.</p></li>
+<li><p><em>numpy.ndarray</em> – A 2D array with the commission error values for
+the input functional on the lon/lat grid.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.AbstractKiteSystem.synthesis_average">
+<span class="sig-name descname"><span class="pre">synthesis_average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AbstractKiteSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><span class="pre">BaseFunctional</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.observation.AbstractKiteSystem.synthesis_average" title="Link to this definition">¶</a></dt>
+<dd><p>This function computes the average on the sphere of the comission error of the input
+gravity field functional. For this purpose, orthogonal properties of spherical harmonics
+are leveraged.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}_{y} = \frac{1}{4\pi} \int_{\Omega} \sigma_y(\lambda, \phi) \, d\Omega\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>functional</strong> (<a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><em>BaseFunctional</em></a>) – Gravity field functional to perform the synthesis.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Commission error spherical average for input functional.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.AlongTrack">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">AlongTrack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.AlongTrack</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">we_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wo_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.AlongTrack" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.BaseObservation" title="gfeatpy.observation.BaseObservation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservation</span></code></a></p>
+<p>This class defines the position displacement observation in the along-track
+direction.</p>
+<p>Constructor for the AlongTrack class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p></li>
+<li><p><strong>Nr</strong> (<em>int</em>) – Number of orbital revolutions per ground-track repeatability period.</p></li>
+<li><p><strong>Nd</strong> (<em>int</em>) – Nodal days per ground-track repeatability period.</p></li>
+<li><p><strong>I</strong> (<em>float</em>) – Inclination [rad].</p></li>
+<li><p><strong>we_0</strong> (<em>float</em>) – Initial Earth-fixed longitude of the ascending node [rad].</p></li>
+<li><p><strong>wo_0</strong> (<em>float</em>) – Initial argument of latitude [rad].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">BaseObservation</span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem" title="gfeatpy.observation.AbstractKiteSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractKiteSystem</span></code></a></p>
+<p>BaseObservation class defines the base object for any observation along a circular orbit.
+It is a derived class from <a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem" title="gfeatpy.observation.AbstractKiteSystem"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AbstractKiteSystem</span></code></a>, which provides the structure of
+the linear system of equations along a circular repeating ground-track. This class defines some additional
+settings that depend on the observations themselves, such as the vertical length of the block-design matrices,
+the actual orbital radius or the amplitude spectral density for the lumped coefficients.
+Moreover, it provides a framework to define any arbitrary design matrix.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.get_H">
+<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.get_H" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for the full design matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full design matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.get_Pyy">
+<span class="sig-name descname"><span class="pre">get_Pyy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">n]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.get_Pyy" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for the full observation covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full observation covariance matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.get_asd">
+<span class="sig-name descname"><span class="pre">get_asd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.get_asd" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for the observation error in terms of Amplitude Spectral Denisty (ASD).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ASD function</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Callable[[float], float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.get_radius">
+<span class="sig-name descname"><span class="pre">get_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.get_radius" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for orbital radius associated to the Repeating Ground-Track selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Orbital radius associated to the Repeating Ground-Track of the observation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.get_we_0">
+<span class="sig-name descname"><span class="pre">get_we_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.get_we_0" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for the initial planet-centred longitude associated to the Repeating Ground-Track selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Initial planet-centred longitude associated to the Repeating Ground-Track of the observation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.get_wo_0">
+<span class="sig-name descname"><span class="pre">get_wo_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.get_wo_0" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for the initial argument of latitude associated to the Repeating Ground-Track selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Initital argument of latitude associated to the Repeating Ground-Track of the observation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.set_observation_error">
+<span class="sig-name descname"><span class="pre">set_observation_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.set_observation_error" title="Link to this definition">¶</a></dt>
+<dd><p>This function sets the lumped coefficients error in the frequency domain from the Amplitude Spectral Density of the
+observation (Sneeuw, 2000).</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma_{km} = \int_{f_{km}+\Delta f/2}^{f_{km}+\Delta f/2} A^2(f) \, df \approx A^2(f_{km}) \Delta f\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Function that defines the amplitude spectral density for an input frequency.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.BaseObservation.simulate_observations">
+<span class="sig-name descname"><span class="pre">simulate_observations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.BaseObservation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gravity_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gfeatpy.gravity.GravityField" title="gfeatpy.gravity.GravityField"><span class="pre">GravityField</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.BaseObservation.simulate_observations" title="Link to this definition">¶</a></dt>
+<dd><p>This function simulates analytically the values of the lumped coefficients <span class="math notranslate nohighlight">\(A_{km}, B_{km}\)</span>
+from an input <a class="reference internal" href="#gfeatpy.gravity.GravityField" title="gfeatpy.gravity.GravityField"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GravityField</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gravity_field</strong> (<a class="reference internal" href="#gfeatpy.gravity.GravityField" title="gfeatpy.gravity.GravityField"><em>GravityField</em></a>) – Gravity field object to fill the parameter vector <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary that contains the integered frequencies as keys and the associated <span class="math notranslate nohighlight">\(A_{km}, B_{km}\)</span>
+coefficients as values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[int, tuple[float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.Constellation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">Constellation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">self:</span> <span class="pre">gfeatpy._core.observation.Constellation,</span> <span class="pre">l_max:</span> <span class="pre">typing.SupportsInt,</span> <span class="pre">Nr:</span> <span class="pre">typing.SupportsInt,</span> <span class="pre">Nd:</span> <span class="pre">typing.SupportsInt,</span> <span class="pre">I:</span> <span class="pre">typing.Annotated[numpy.typing.ArrayLike,</span> <span class="pre">numpy.float64,</span> <span class="pre">&quot;[m,</span> <span class="pre">1]&quot;],</span> <span class="pre">rho_0:</span> <span class="pre">typing.SupportsFloat,</span> <span class="pre">longitude_policy:</span> <span class="pre">gfeatpy._core.observation.LongitudePolicy</span> <span class="pre">=</span> <span class="pre">&lt;LongitudePolicy.INTERLEAVING:</span> <span class="pre">0&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.Constellation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.MultiObservation" title="gfeatpy.observation.MultiObservation"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiObservation</span></code></a></p>
+<p>This class wraps the <a class="reference internal" href="#gfeatpy.observation.MultiObservation" title="gfeatpy.observation.MultiObservation"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiObservation</span></code></a> class to handle
+constellations in a simplified way.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class assumes that the observation type is <code class="xref py py-attr docutils literal notranslate"><span class="pre">Collinear</span></code>.
+Future versions will extend the class to any observation type.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p></li>
+<li><p><strong>Nr</strong> (<em>int</em>) – Number of orbital revolutions per ground-track repeatability period.</p></li>
+<li><p><strong>Nd</strong> (<em>int</em>) – Nodal days per ground-track repeatability period.</p></li>
+<li><p><strong>I</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – List of inclinations of the different repeating orbits [rad].</p></li>
+<li><p><strong>rho_0</strong> (<em>float</em>) – Nominal intersatellite distance [m].</p></li>
+<li><p><strong>longitude_policy</strong> (<a class="reference internal" href="#gfeatpy.observation.LongitudePolicy" title="gfeatpy.observation.LongitudePolicy"><em>LongitudePolicy</em></a>) – Longitude separation policy.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.Constellation.set_observation_error">
+<span class="sig-name descname"><span class="pre">set_observation_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.Constellation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_instrument_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accelerometer_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.Constellation.set_observation_error" title="Link to this definition">¶</a></dt>
+<dd><p>An important error contribution to the range observation error is also
+the error in the accelerometer. This error propagates to the range observation.
+This function accounts for this propagation internally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>range_instrument_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Ranging instrument amplitude spectral density for an input frequency.</p></li>
+<li><p><strong>accelerometer_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Accelerometer amplitude spectral density for an input frequency.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.GPS">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">GPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.GPS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">we_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wo_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.GPS" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.MultiObservation" title="gfeatpy.observation.MultiObservation"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiObservation</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.GPS.set_observation_error">
+<span class="sig-name descname"><span class="pre">set_observation_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.GPS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_w</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddu_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddv_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddw_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.GPS.set_observation_error" title="Link to this definition">¶</a></dt>
+<dd><p>Set the observation error for each component of the GPS observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma_u</strong> (<em>float</em>) – Standard deviation of the radial component</p></li>
+<li><p><strong>sigma_v</strong> (<em>float</em>) – Standard deviation of the along-track component</p></li>
+<li><p><strong>sigma_w</strong> (<em>float</em>) – Standard deviation of the cross-track component</p></li>
+<li><p><strong>ddu_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Amplitude spectral density of the radial acceleration</p></li>
+<li><p><strong>ddv_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Amplitude spectral density of the along-track acceleration</p></li>
+<li><p><strong>ddw_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Amplitude spectral density of the cross-track acceleration</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class enum">
+<dt class="sig sig-object py" id="gfeatpy.observation.LongitudePolicy">
+<em class="property"><span class="k"><span class="pre">enum</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">LongitudePolicy</span></span><a class="headerlink" href="#gfeatpy.observation.LongitudePolicy" title="Link to this definition">¶</a></dt>
+<dd><p>Enumeration that defines the two built-in longitude separation policies for the <a class="reference internal" href="#gfeatpy.observation.Constellation" title="gfeatpy.observation.Constellation"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Constellation</span></code></a>
+class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gfeatpy.observation.LongitudePolicy.INTERLEAVING">
+<span class="sig-name descname"><span class="pre">INTERLEAVING</span></span><a class="headerlink" href="#gfeatpy.observation.LongitudePolicy.INTERLEAVING" title="Link to this definition">¶</a></dt>
+<dd><p>The ground-tracks are perfectly interleaved at the equator.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gfeatpy.observation.LongitudePolicy.OVERLAPPING">
+<span class="sig-name descname"><span class="pre">OVERLAPPING</span></span><a class="headerlink" href="#gfeatpy.observation.LongitudePolicy.OVERLAPPING" title="Link to this definition">¶</a></dt>
+<dd><p>The ground-tracks overlap at the equator.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.MultiObservation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">MultiObservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.MultiObservation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">gfeatpy._core.observation.BaseObservation</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.MultiObservation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem" title="gfeatpy.observation.AbstractKiteSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractKiteSystem</span></code></a></p>
+<p>This class takes a list of attr:<cite>~gfeatpy.observation.BaseObservation</cite> objects to compute
+the combined performance of multiple observations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To maintain the simplicity of the block-kite system, this class only supports observations
+with the same associated ground-track repeatability conditions (same number of revolutions <span class="math notranslate nohighlight">\(N_r\)</span>
+as well as nodal days <span class="math notranslate nohighlight">\(N_d\)</span>). In this way, the individual block-kite structure of every observation
+can be applied to the system of combined observations.</p>
+</div>
+<p>Constructor for MultiObservation class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p></li>
+<li><p><strong>Nr</strong> (<em>int</em>) – Number of orbital revolutions per ground-track repeatability period.</p></li>
+<li><p><strong>Nd</strong> (<em>int</em>) – Nodal days per ground-track repeatability period.</p></li>
+<li><p><strong>observations</strong> (<em>list</em><em>[</em><a class="reference internal" href="#gfeatpy.observation.BaseObservation" title="gfeatpy.observation.BaseObservation"><em>BaseObservation</em></a><em>]</em>) – List of single observation objects to be combined</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.MultiObservation.get_observations">
+<span class="sig-name descname"><span class="pre">get_observations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.MultiObservation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">gfeatpy._core.observation.BaseObservation</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.observation.MultiObservation.get_observations" title="Link to this definition">¶</a></dt>
+<dd><p>Getter for the individual observations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of single observation objects that form the combined observation</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#gfeatpy.observation.BaseObservation" title="gfeatpy.observation.BaseObservation">BaseObservation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.Potential">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">Potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.Potential</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">we_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wo_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.Potential" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.BaseObservation" title="gfeatpy.observation.BaseObservation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservation</span></code></a></p>
+<p>This class defines the perturbing potential observation for a circular orbit.</p>
+<p>Constructor for the Radial class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p></li>
+<li><p><strong>Nr</strong> (<em>int</em>) – Number of orbital revolutions per ground-track repeatability period.</p></li>
+<li><p><strong>Nd</strong> (<em>int</em>) – Nodal days per ground-track repeatability period.</p></li>
+<li><p><strong>I</strong> (<em>float</em>) – Inclination [rad].</p></li>
+<li><p><strong>we_0</strong> (<em>float</em>) – Initial Earth-fixed longitude of the ascending node [rad].</p></li>
+<li><p><strong>wo_0</strong> (<em>float</em>) – Initial argument of latitude [rad].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.Radial">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">Radial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.Radial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">we_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wo_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.Radial" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.BaseObservation" title="gfeatpy.observation.BaseObservation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservation</span></code></a></p>
+<p>This class defines the position displacement observation in the radial
+direction.</p>
+<p>Constructor for the Radial class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p></li>
+<li><p><strong>Nr</strong> (<em>int</em>) – Number of orbital revolutions per ground-track repeatability period.</p></li>
+<li><p><strong>Nd</strong> (<em>int</em>) – Nodal days per ground-track repeatability period.</p></li>
+<li><p><strong>I</strong> (<em>float</em>) – Inclination [rad].</p></li>
+<li><p><strong>we_0</strong> (<em>float</em>) – Initial Earth-fixed longitude of the ascending node [rad].</p></li>
+<li><p><strong>wo_0</strong> (<em>float</em>) – Initial argument of latitude [rad].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.observation.Range">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.observation.</span></span><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.Range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">we_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wo_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.observation.Range" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gfeatpy.observation.BaseObservation" title="gfeatpy.observation.BaseObservation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservation</span></code></a></p>
+<p>Constructor for the Range class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l_max</strong> (<em>int</em>) – Cut-off degree.</p></li>
+<li><p><strong>Nr</strong> (<em>int</em>) – Number of orbital revolutions per ground-track repeatability period.</p></li>
+<li><p><strong>Nd</strong> (<em>int</em>) – Nodal days per ground-track repeatability period.</p></li>
+<li><p><strong>I</strong> (<em>float</em>) – Inclination [rad].</p></li>
+<li><p><strong>rho_0</strong> (<em>float</em>) – Nominal intersatellite distance [m].</p></li>
+<li><p><strong>we_0</strong> (<em>float</em>) – Initial Earth-fixed longitude of the ascending node [rad].</p></li>
+<li><p><strong>wo_0</strong> (<em>float</em>) – Initial argument of latitude [rad].</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.observation.Range.set_observation_error">
+<span class="sig-name descname"><span class="pre">set_observation_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.observation.Range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_instrument_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accelerometer_asd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SupportsFloat</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#gfeatpy.observation.Range.set_observation_error" title="Link to this definition">¶</a></dt>
+<dd><p>An important error contribution to the range observation error is also
+the error in the accelerometer. This error propagates to the range observation.
+This function accounts for this propagation internally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>range_instrument_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Ranging instrument amplitude spectral density for an input frequency.</p></li>
+<li><p><strong>accelerometer_asd</strong> (<em>Callable</em><em>[</em><em>[</em><em>float</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Accelerometer amplitude spectral density for an input frequency.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="plotting-module">
+<h1>Plotting module<a class="headerlink" href="#plotting-module" title="Link to this heading">¶</a></h1>
+</section>
+<section id="module-gfeatpy.utils">
+<span id="utils-module"></span><h1>Utils module<a class="headerlink" href="#module-gfeatpy.utils" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.R1">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">R1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">3]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.utils.R1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.R2">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">R2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">3]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.utils.R2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.R3">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">R3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">3]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.utils.R3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.utils.Verbosity">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">Verbosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.utils.Verbosity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.utils.Verbosity" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>Silent</p>
+<p>Info</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="gfeatpy.utils.Verbosity.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#gfeatpy.utils.Verbosity.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.aop_dot">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">aop_dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.utils.aop_dot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.cart2sph">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">cart2sph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.utils.cart2sph" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.eci2ecrf">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">eci2ecrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.utils.eci2ecrf" title="Link to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>eci2ecrf(r_eci: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, “[3, 1]”], t: typing.SupportsFloat) -&gt; typing.Annotated[numpy.typing.NDArray[numpy.float64], “[3, 1]”]</p></li>
+<li><p>eci2ecrf(r_eci: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, “[3, 1]”], v_eci: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, “[3, 1]”], t: typing.SupportsFloat) -&gt; tuple[typing.Annotated[numpy.typing.NDArray[numpy.float64], “[3, 1]”], typing.Annotated[numpy.typing.NDArray[numpy.float64], “[3, 1]”]]</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.ecrf2eci">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">ecrf2eci</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.utils.ecrf2eci" title="Link to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>ecrf2eci(r_ecrf: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, “[3, 1]”], t: typing.SupportsFloat) -&gt; typing.Annotated[numpy.typing.NDArray[numpy.float64], “[3, 1]”]</p></li>
+<li><p>ecrf2eci(r_ecrf: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, “[3, 1]”], v_ecrf: typing.Annotated[numpy.typing.ArrayLike, numpy.float64, “[3, 1]”], t: typing.SupportsFloat) -&gt; tuple[typing.Annotated[numpy.typing.NDArray[numpy.float64], “[3, 1]”], typing.Annotated[numpy.typing.NDArray[numpy.float64], “[3, 1]”]]</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.ma_dot">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">ma_dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.utils.ma_dot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.raan_dot">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">raan_dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.utils.raan_dot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.rfft">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">rfft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.complex128</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.utils.rfft" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.sma_from_rgt">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">sma_from_rgt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg6</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg7</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsFloat</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gfeatpy.utils.sma_from_rgt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.utils.sph2cart">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.utils.</span></span><span class="sig-name descname"><span class="pre">sph2cart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[3,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gfeatpy.utils.sph2cart" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Examples</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="api.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">API reference</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Gabriel Valles Valverde
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Planet object</a><ul>
+<li><a class="reference internal" href="#gfeatpy.Planet"><code class="docutils literal notranslate"><span class="pre">Planet</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.Planet.C20"><code class="docutils literal notranslate"><span class="pre">Planet.C20</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.Planet.ae"><code class="docutils literal notranslate"><span class="pre">Planet.ae</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.Planet.mu"><code class="docutils literal notranslate"><span class="pre">Planet.mu</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.Planet.rho_e"><code class="docutils literal notranslate"><span class="pre">Planet.rho_e</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.Planet.rho_w"><code class="docutils literal notranslate"><span class="pre">Planet.rho_w</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.Planet.theta_dot"><code class="docutils literal notranslate"><span class="pre">Planet.theta_dot</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gravity-module">Gravity module</a><ul>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1B"><code class="docutils literal notranslate"><span class="pre">AOD1B</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1B.get"><code class="docutils literal notranslate"><span class="pre">AOD1B.get()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1B.load"><code class="docutils literal notranslate"><span class="pre">AOD1B.load()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1BType"><code class="docutils literal notranslate"><span class="pre">AOD1BType</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1BType.ATM"><code class="docutils literal notranslate"><span class="pre">AOD1BType.ATM</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1BType.OCN"><code class="docutils literal notranslate"><span class="pre">AOD1BType.OCN</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1BType.GLO"><code class="docutils literal notranslate"><span class="pre">AOD1BType.GLO</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.AOD1BType.OBA"><code class="docutils literal notranslate"><span class="pre">AOD1BType.OBA</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.gravity.BaseFunctional"><code class="docutils literal notranslate"><span class="pre">BaseFunctional</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.DateTime"><code class="docutils literal notranslate"><span class="pre">DateTime</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.EquivalentWaterHeight"><code class="docutils literal notranslate"><span class="pre">EquivalentWaterHeight</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.GeoidHeight"><code class="docutils literal notranslate"><span class="pre">GeoidHeight</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.GravityAnomaly"><code class="docutils literal notranslate"><span class="pre">GravityAnomaly</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.GravityField"><code class="docutils literal notranslate"><span class="pre">GravityField</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.gravity.GravityField.load"><code class="docutils literal notranslate"><span class="pre">GravityField.load()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.coefficients"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.coefficients</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.degree_variance"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.degree_variance()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.gravity"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.gravity()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.potential"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.potential()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.rms_per_coefficient_per_degree"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.rms_per_coefficient_per_degree()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.sigmas"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.sigmas</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonics.synthesis"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonics.synthesis()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonicsCovariance"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonicsCovariance</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.Pxx"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonicsCovariance.Pxx</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.degree_variance"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonicsCovariance.degree_variance()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.from_normal"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonicsCovariance.from_normal()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.rms_per_coefficient_per_degree"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonicsCovariance.rms_per_coefficient_per_degree()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.gravity.SphericalHarmonicsCovariance.synthesis"><code class="docutils literal notranslate"><span class="pre">SphericalHarmonicsCovariance.synthesis()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#observation-module">Observation module</a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.degree_variance"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.degree_variance()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.get_N"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.get_N()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.get_Pxx"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.get_Pxx()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.get_sigma_x"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.get_sigma_x()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.rms_per_coefficient_per_degree"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.rms_per_coefficient_per_degree()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.set_kaula_regularization"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.set_kaula_regularization()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.set_solution_time_window"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.set_solution_time_window()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.solve"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.solve()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.synthesis"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.synthesis()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.AbstractKiteSystem.synthesis_average"><code class="docutils literal notranslate"><span class="pre">AbstractKiteSystem.synthesis_average()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.observation.AlongTrack"><code class="docutils literal notranslate"><span class="pre">AlongTrack</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation"><code class="docutils literal notranslate"><span class="pre">BaseObservation</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.get_H"><code class="docutils literal notranslate"><span class="pre">BaseObservation.get_H()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.get_Pyy"><code class="docutils literal notranslate"><span class="pre">BaseObservation.get_Pyy()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.get_asd"><code class="docutils literal notranslate"><span class="pre">BaseObservation.get_asd()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.get_radius"><code class="docutils literal notranslate"><span class="pre">BaseObservation.get_radius()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.get_we_0"><code class="docutils literal notranslate"><span class="pre">BaseObservation.get_we_0()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.get_wo_0"><code class="docutils literal notranslate"><span class="pre">BaseObservation.get_wo_0()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.set_observation_error"><code class="docutils literal notranslate"><span class="pre">BaseObservation.set_observation_error()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.BaseObservation.simulate_observations"><code class="docutils literal notranslate"><span class="pre">BaseObservation.simulate_observations()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.observation.Constellation"><code class="docutils literal notranslate"><span class="pre">Constellation</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.Constellation.set_observation_error"><code class="docutils literal notranslate"><span class="pre">Constellation.set_observation_error()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.observation.GPS"><code class="docutils literal notranslate"><span class="pre">GPS</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.GPS.set_observation_error"><code class="docutils literal notranslate"><span class="pre">GPS.set_observation_error()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.observation.LongitudePolicy"><code class="docutils literal notranslate"><span class="pre">LongitudePolicy</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.LongitudePolicy.INTERLEAVING"><code class="docutils literal notranslate"><span class="pre">LongitudePolicy.INTERLEAVING</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.LongitudePolicy.OVERLAPPING"><code class="docutils literal notranslate"><span class="pre">LongitudePolicy.OVERLAPPING</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.observation.MultiObservation"><code class="docutils literal notranslate"><span class="pre">MultiObservation</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.MultiObservation.get_observations"><code class="docutils literal notranslate"><span class="pre">MultiObservation.get_observations()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.observation.Potential"><code class="docutils literal notranslate"><span class="pre">Potential</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.Radial"><code class="docutils literal notranslate"><span class="pre">Radial</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.observation.Range"><code class="docutils literal notranslate"><span class="pre">Range</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.observation.Range.set_observation_error"><code class="docutils literal notranslate"><span class="pre">Range.set_observation_error()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plotting-module">Plotting module</a></li>
+<li><a class="reference internal" href="#module-gfeatpy.utils">Utils module</a><ul>
+<li><a class="reference internal" href="#gfeatpy.utils.R1"><code class="docutils literal notranslate"><span class="pre">R1()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.R2"><code class="docutils literal notranslate"><span class="pre">R2()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.R3"><code class="docutils literal notranslate"><span class="pre">R3()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.Verbosity"><code class="docutils literal notranslate"><span class="pre">Verbosity</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.utils.Verbosity.name"><code class="docutils literal notranslate"><span class="pre">Verbosity.name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.utils.aop_dot"><code class="docutils literal notranslate"><span class="pre">aop_dot()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.cart2sph"><code class="docutils literal notranslate"><span class="pre">cart2sph()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.eci2ecrf"><code class="docutils literal notranslate"><span class="pre">eci2ecrf()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.ecrf2eci"><code class="docutils literal notranslate"><span class="pre">ecrf2eci()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.ma_dot"><code class="docutils literal notranslate"><span class="pre">ma_dot()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.raan_dot"><code class="docutils literal notranslate"><span class="pre">raan_dot()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.rfft"><code class="docutils literal notranslate"><span class="pre">rfft()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.sma_from_rgt"><code class="docutils literal notranslate"><span class="pre">sma_from_rgt()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.utils.sph2cart"><code class="docutils literal notranslate"><span class="pre">sph2cart()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
