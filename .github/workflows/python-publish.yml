@@ -21,6 +21,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Show version from targeting tag
+        run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
           
       - name: Build release distributions
         run: |
