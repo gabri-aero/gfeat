@@ -9,7 +9,7 @@ requires = [
 build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
-cmake.args = ["-DCMAKE_BUILD_TYPE=Release", "-DBUILD_GFEATPY=ON"]
+cmake.args = ["-DBUILD_GFEATPY=ON", "-DPROJECT_VERSION=$VERSION"]
 
 [project]
 name = "gfeatpy"
