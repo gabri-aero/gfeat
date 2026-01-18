@@ -14,6 +14,7 @@ name = "gfeatpy"
 version = "0.1.0"
 description="A Python wrapper for a C++ gravity field error analysis toolkit. "
 readme = "README.md"
+license = { text = "GPL-3.0-or-later" } 
 authors = [
   { name = "Gabriel Valles", email = "gvallesv@outlook.es" },
 ]
