@@ -39,3 +39,12 @@
 
 # debug information files
 *.dwo
+
+# Custom ignores
+data/
+.vscode/
+build/
+docs/
+pydocs/_*
+__pycache__/
+.ipynb_checkpoints/
