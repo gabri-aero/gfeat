@@ -3,23 +3,19 @@ requires = [
   "scikit-build-core>=0.3.3", 
   "pybind11", 
   "pybind11-stubgen", 
-  "setuptools_scm[toml]>=8"
   ]
 build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
-cmake.args = ["-DCMAKE_BUILD_TYPE=Release", "-DBUILD_GFEATPY=ON"]
+cmake.args = ["-DBUILD_GFEATPY=ON", "-DPROJECT_VERSION=0.1.1"]
 
 [project]
 name = "gfeatpy"
-dynamic = ["version"]
+version = "0.1.1"
 description="A Python wrapper for a C++ gravity field error analysis toolkit. "
 readme = "README.md"
+license = { text = "GPL-3.0-or-later" } 
 authors = [
   { name = "Gabriel Valles", email = "gvallesv@outlook.es" },
 ]
 requires-python = ">=3.11"
-
-[tool.setuptools_scm]
-version_scheme = "release-branch-semver"
-local_scheme = "no-local-version"
