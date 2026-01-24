@@ -23,20 +23,22 @@ jobs:
           python-version: "3.x"
 
       - name: Show version from targeting tag
-        run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+        run: echo "VERSION=${{ github.event.release.tag_name || '0.0.0-test' }}" >> $GITHUB_ENV
           
-      - name: Build release distributions
+      - name: Install build dependencies
         run: |
-          python -m pip install build auditwheel
-          python -m build
-          auditwheel repair dist/*.whl --wheel-dir dist
-          rm dist/*-linux*.whl
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install scikit-build-core pybind11 pybind11-stubgen cibuildwheel
 
-      - name: Upload distributions
+      - name: Build distributions
+        run: |
+          python -m cibuildwheel --output-dir wheelhouse
+
+      - name: Upload wheel artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
-          path: dist/
+          name: wheel
+          path: wheelhouse/*.whl
 
   pypi-publish:
     runs-on: ubuntu-latest
@@ -52,13 +54,13 @@ jobs:
       url: https://pypi.org/project/gfeatpy/${{ github.event.release.name }}
 
     steps:
-      - name: Retrieve release distributions
+      - name: Retrieve wheels
         uses: actions/download-artifact@v4
         with:
-          name: release-dists
-          path: dist/
+          name: wheel
+          path: wheelhouse/
 
-      - name: Publish release distributions to PyPI
+      - name: Publish wheel artifacts to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: dist/
+          packages-dir: wheelhouse/

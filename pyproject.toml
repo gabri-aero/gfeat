@@ -14,8 +14,14 @@ name = "gfeatpy"
 version = "0.1.1"
 description="A Python wrapper for a C++ gravity field error analysis toolkit. "
 readme = "README.md"
-license = { text = "GPL-3.0-or-later" } 
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 authors = [
   { name = "Gabriel Valles", email = "gvallesv@outlook.es" },
 ]
 requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.23",
+  "matplotlib>=3.5",
+  "cartopy>=0.21.1"
+]
