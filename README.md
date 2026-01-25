@@ -4,6 +4,11 @@
 [![PyPI version](https://img.shields.io/pypi/v/gfeatpy)](https://pypi.org/project/gfeatpy/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen)](https://gabri-aero.github.io/gfeat/)
+![Linux Only](https://img.shields.io/badge/Linux-Only-red?logo=linux&logoColor=black)
+
+
+
+
 
 
 > <b>G</b>ravity <b>F</b>ield <b>E</b>rror <b>A</b>nalysis <b>T</b>ool (GFEAT) is a C++ library that employs an analytical method to estimate gravity field error from different orbital configurations and observations.
