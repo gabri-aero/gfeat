@@ -2,7 +2,7 @@
 
 
 [![PyPI version](https://img.shields.io/pypi/v/gfeatpy)](https://pypi.org/project/gfeatpy/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen)](https://gabri-aero.github.io/gfeat/)
 
 
@@ -24,11 +24,7 @@
 
 ### Installation
 
-The library is available in the Python Package Index. It is recommended to create a conda environment first.
-```{bash}
-conda create env --name gfeat_env
-```
-Then, install the library.
+The library is available in the Python Package Index. 
 ```{bash}
 pip install gfeatpy
 ```
@@ -37,8 +33,8 @@ pip install gfeatpy
 
 - Add and improve unit tests for all components.
 - Extend Constellation class to any observation.
-- Include range-rate, range-acceleration.
 - Include optimization examples with PyGMO.
+- Extend to eccentric orbits.
 
 ### C++ development
 
