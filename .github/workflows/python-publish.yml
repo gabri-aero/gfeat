@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   release-build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest, macos-lates]
 
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +42,7 @@ jobs:
 
   pypi-publish:
     runs-on: ubuntu-latest
+    if: github.event_name == 'release'
     needs:
       - release-build
     permissions:
