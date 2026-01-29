@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   release-build:
-    runs-on: [ubuntu-latest, windows-latest, macos-lates]
+    runs-on: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
