@@ -6,14 +6,9 @@
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen)](https://gabri-aero.github.io/gfeat/)
 ![Linux Only](https://img.shields.io/badge/Linux-Only-red?logo=linux&logoColor=black)
 
-
-
-
-
-
 > <b>G</b>ravity <b>F</b>ield <b>E</b>rror <b>A</b>nalysis <b>T</b>ool (GFEAT) is a C++ library that employs an analytical method to estimate gravity field error from different orbital configurations and observations.
 
-### Features
+## Features
 
 - Estimation of gravity field error.
     - Error propagation from observations PSD to the Stokes' coefficients.
@@ -27,26 +22,26 @@
     - FFT employed for efficient computation.
 
 
-### Installation
+## Installation
 
 The library is available in the Python Package Index. 
-```{bash}
+```bash
 pip install gfeatpy
 ```
 
-### Future Improvements
+## Future Improvements
 
 - Add and improve unit tests for all components.
 - Extend Constellation class to any observation.
 - Include optimization examples with PyGMO.
 - Extend to eccentric orbits.
 
-### C++ development
+## C++ development
 
 To use the library natively in C++ is currently not recommended given the limitations for output data as well as the easier to use plotting tools available in Python. However, a good starting point are the C++ unit tests, under the `test` folder.
 
 Some very descriptive examples can be found in [TestConstellation.cpp](https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestConstellation.cpp) and [TestCollinear.cpp](https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestCollinear.cpp). You can build and run all the tests like this.
-```{make}
+```bash
 mkdir build
 cd build
 cmake ..
@@ -54,7 +49,7 @@ make
 ctest
 ```
 
-### References
+## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 

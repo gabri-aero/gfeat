@@ -21,6 +21,7 @@ extensions = [
     'sphinx.ext.inheritance_diagram',
     'nbsphinx',    
     'enum_tools.autoenum',
+    'myst_parser',
 ]
 
 templates_path = ['_templates']
