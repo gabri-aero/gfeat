@@ -174,7 +174,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -199,7 +199,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html">Planet object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#gravity-module">Gravity module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#observation-module">Observation module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#plotting-module">Plotting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#module-gfeatpy.plotting">Plotting module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#module-gfeatpy.utils">Utils module</a></li>
 </ul>
 </li>
@@ -251,13 +251,137 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section id="welcome-to-gfeat-s-documentation">
 <h1>Welcome to GFEAT’s documentation!<a class="headerlink" href="#welcome-to-gfeat-s-documentation" title="Link to this heading">¶</a></h1>
+<section id="gfeat">
+<h2>GFEAT<a class="headerlink" href="#gfeat" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://pypi.org/project/gfeatpy/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/gfeatpy" /></a>
+<a class="reference download internal" download="" href="_downloads/3b423627fe21976c3c06e60f78e14ae1/LICENSE"><span class="xref download myst"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPLv3-blue.svg" /></span></a>
+<a class="reference external" href="https://gabri-aero.github.io/gfeat/"><img alt="Documentation" src="https://img.shields.io/badge/docs-available-brightgreen" /></a>
+<img alt="Linux Only" src="https://img.shields.io/badge/Linux-Only-red?logo=linux&amp;logoColor=black" /></p>
+<blockquote>
+<div><p><b>G</b>ravity <b>F</b>ield <b>E</b>rror <b>A</b>nalysis <b>T</b>ool (GFEAT) is a C++ library that employs an analytical method to estimate gravity field error from different orbital configurations and observations.</p>
+</div></blockquote>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Estimation of gravity field error.</p>
+<ul>
+<li><p>Error propagation from observations PSD to the Stokes’ coefficients.</p></li>
+<li><p>Several observation types supported: gravity potential, radial, along-track and cross-track displacements, inter-satellite range…</p></li>
+<li><p>Combination of multiple observation types: 3D GPS position and multi-pair constellations.</p></li>
+</ul>
+</li>
+<li><p>Processing of gravity field data.</p>
+<ul>
+<li><p>Gravity field I/O handling.</p></li>
+<li><p>Error covariance handling from normal equations.</p></li>
+<li><p>Synthesis with different functionals: EWH, gravity anomalies, geoid heights.</p></li>
+<li><p>Covariance synthesis also supported.</p></li>
+<li><p>FFT employed for efficient computation.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
+<p>The library is available in the Python Package Index.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gfeatpy
+</pre></div>
+</div>
+</section>
+<section id="future-improvements">
+<h3>Future Improvements<a class="headerlink" href="#future-improvements" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add and improve unit tests for all components.</p></li>
+<li><p>Extend Constellation class to any observation.</p></li>
+<li><p>Include optimization examples with PyGMO.</p></li>
+<li><p>Extend to eccentric orbits.</p></li>
+</ul>
+</section>
+<section id="c-development">
+<h3>C++ development<a class="headerlink" href="#c-development" title="Link to this heading">¶</a></h3>
+<p>To use the library natively in C++ is currently not recommended given the limitations for output data as well as the easier to use plotting tools available in Python. However, a good starting point are the C++ unit tests, under the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder.</p>
+<p>Some very descriptive examples can be found in <a class="reference external" href="https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestConstellation.cpp">TestConstellation.cpp</a> and <a class="reference external" href="https://github.com/gabri-aero/gfeat/blob/main/tests/observation/TestCollinear.cpp">TestCollinear.cpp</a>. You can build and run all the tests like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..
+make
+ctest
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Balmino1996" class="csl-entry">
+<p>Balmino, G., E. Schrama, and N. Sneeuw. 1996.
+“<span class="nocase">Compatibility of first-order circular orbit
+perturbations theories; consequences for cross-track inclination
+functions</span>.” <em>Journal of Geodesy</em> 70 (9): 554–61.
+<a class="reference external" href="https://doi.org/10.1007/bf00867863">https://doi.org/10.1007/bf00867863</a>.</p>
+</div>
+<div id="ref-Jekeli1981" class="csl-entry">
+<p>Jekeli, Christopher. 1981. “<span class="nocase">Alternative Methods to
+Smooth the Earth’s Gravity Field</span>.” Report 327. Columbus, Ohio:
+Department of Geodetic Science; Surveying, The Ohio State University.</p>
+</div>
+<div id="ref-Kaula1966" class="csl-entry">
+<p>Kaula, William M. 1966. <em><span class="nocase">Theory of Satellite
+Geodesy: Applications of Satellites to Geodesy</span></em>. Blaisdell
+Publishing Company.</p>
+</div>
+<div id="ref-Schrama1990" class="csl-entry">
+<p>Schrama, E. J. O. 1990. “<span class="nocase">Gravity field error
+analysis: Applications of GPS receivers and gradiometers on low orbiting
+platforms</span>.” NASA.</p>
+</div>
+<div id="ref-Schrama1991" class="csl-entry">
+<p>———. 1991a. “<span class="nocase">Error Propagation and Correlation
+Analysis of Covariance Matrices</span>.” Goddard Space Flight Center;
+Personal communication.</p>
+</div>
+<div id="ref-Schrama1991a" class="csl-entry">
+<p>———. 1991b. “<span class="nocase">Gravity field error analysis:
+Applications of global positioning system receivers and gradiometers on
+low orbiting platforms</span>.” <em>Journal of Geophysical Research: Solid
+Earth</em> 96 (B12): 20041–51. <a class="reference external" href="https://doi.org/10.1029/91jb01972">https://doi.org/10.1029/91jb01972</a>.</p>
+</div>
+<div id="ref-Sneeuw1994" class="csl-entry">
+<p>Sneeuw, Nico. 1994. “<span class="nocase">Global spherical harmonic
+analysis by least-squares and numerical quadrature methods in historical
+perspective</span>.” <em>Geophysical Journal International</em> 118 (3):
+707–16. <a class="reference external" href="https://doi.org/10.1111/j.1365-246x.1994.tb03995.x">https://doi.org/10.1111/j.1365-246x.1994.tb03995.x</a>.</p>
+</div>
+<div id="ref-Sneeuw2000" class="csl-entry">
+<p>Sneeuw, Nicolaas. 2000. “<span class="nocase">A Semi-Analytical Approach
+to Gravity Field Analysis from Satellite Observations</span>.” PhD
+thesis, Institut für Astronomische und Physikalische Geodäsie, TU
+München.</p>
+</div>
+<div id="ref-Visser2012" class="csl-entry">
+<p>Visser, P. N. A. M., E. J. O. Schrama, N. Sneeuw, and M. Weigelt. 2012.
+“<span class="nocase">Dependency of Resolvable Gravitational Spatial
+Resolution on Space-Borne Observation Techniques</span>.” In
+<em><span class="nocase">Geodesy for Planet Earth</span></em>, edited by Steve
+Kenyon, Maria Christina Pacino, and Urs Marti, 373–79. Berlin,
+Heidelberg: Springer Berlin Heidelberg.</p>
+</div>
+<div id="ref-Wahr1998" class="csl-entry">
+<p>Wahr, John, Mery Molenaar, and Frank Bryan. 1998.
+“<span class="nocase">Time variability of the Earth’s gravity field:
+Hydrological and oceanic effects and their possible detection using
+GRACE</span>.” <em>Journal of Geophysical Research: Solid Earth</em> 103 (B12):
+30205–29. <a class="reference external" href="https://doi.org/10.1029/98jb02844">https://doi.org/10.1029/98jb02844</a>.</p>
+</div>
+</div>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -269,7 +393,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html">Planet object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#gravity-module">Gravity module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#observation-module">Observation module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#plotting-module">Plotting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#module-gfeatpy.plotting">Plotting module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#module-gfeatpy.utils">Utils module</a></li>
 </ul>
 </li>
@@ -315,8 +439,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to GFEAT’s documentation!</a><ul>
+<li><a class="reference internal" href="#gfeat">GFEAT</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#future-improvements">Future Improvements</a></li>
+<li><a class="reference internal" href="#c-development">C++ development</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

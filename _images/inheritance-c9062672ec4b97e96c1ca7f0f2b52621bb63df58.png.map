@@ -1,0 +1,6 @@
+<map id="inheritanceb40542cb4f" name="inheritanceb40542cb4f">
+<area shape="rect" id="node1" href="#gfeatpy.gravity.BaseFunctional" target="_top" title="BaseFunctional is an abstract class that serves as parent class to implement " alt="" coords="5,55,127,80"/>
+<area shape="rect" id="node2" href="#gfeatpy.gravity.EquivalentWaterHeight" target="_top" title="EquivalentWaterHeight class defines the degree common terms for computation of EWH " alt="" coords="175,5,347,31"/>
+<area shape="rect" id="node3" href="#gfeatpy.gravity.GeoidHeight" target="_top" title="GeoidHeight class defines the degree common terms for computation of geoid height." alt="" coords="209,55,312,80"/>
+<area shape="rect" id="node4" href="#gfeatpy.gravity.GravityAnomaly" target="_top" title="GravityAnomaly class defines the degree common terms for computation of gravity anomalies" alt="" coords="197,104,325,129"/>
+</map>

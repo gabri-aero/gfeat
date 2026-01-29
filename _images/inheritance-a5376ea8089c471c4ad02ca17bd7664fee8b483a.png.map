@@ -1,0 +1,12 @@
+<map id="inheritance8af429003f" name="inheritance8af429003f">
+<area shape="rect" id="node1" href="#gfeatpy.observation.AbstractKiteSystem" target="_top" title="AbstractKiteSystem class defines the base object that handles the block&#45;kite structure " alt="" coords="5,203,156,228"/>
+<area shape="rect" id="node3" href="#gfeatpy.observation.BaseObservation" target="_top" title="BaseObservation class defines the base object for any observation along a circular orbit." alt="" coords="205,129,338,155"/>
+<area shape="rect" id="node5" href="#gfeatpy.observation.MultiObservation" target="_top" title="This class takes a list of attr:`~gfeatpy.observation.BaseObservation` objects to compute " alt="" coords="204,252,339,277"/>
+<area shape="rect" id="node2" href="#gfeatpy.observation.AlongTrack" target="_top" title="This class defines the position displacement observation in the along&#45;track" alt="" coords="394,5,487,31"/>
+<area shape="rect" id="node6" title="This class defines the position displacement observation in the cross&#45;track" alt="" coords="395,55,487,80"/>
+<area shape="rect" id="node8" href="#gfeatpy.observation.Potential" target="_top" title="This class defines the perturbing potential observation for a circular orbit." alt="" coords="401,104,481,129"/>
+<area shape="rect" id="node9" href="#gfeatpy.observation.Radial" target="_top" title="This class defines the position displacement observation in the radial" alt="" coords="405,153,477,179"/>
+<area shape="rect" id="node10" href="#gfeatpy.observation.Range" target="_top" title="Range" alt="" coords="405,203,477,228"/>
+<area shape="rect" id="node4" href="#gfeatpy.observation.Constellation" target="_top" title="This class wraps the :attr:`~gfeatpy.observation.MultiObservation` class to handle" alt="" coords="387,252,495,277"/>
+<area shape="rect" id="node7" href="#gfeatpy.observation.GPS" target="_top" title="GPS" alt="" coords="405,301,477,327"/>
+</map>

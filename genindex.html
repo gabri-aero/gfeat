@@ -197,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html">Planet object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#gravity-module">Gravity module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#observation-module">Observation module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#plotting-module">Plotting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#module-gfeatpy.plotting">Plotting module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gfeatpy.html#module-gfeatpy.utils">Utils module</a></li>
 </ul>
 </li>
@@ -259,12 +259,14 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="gfeatpy.html#gfeatpy.observation.AbstractKiteSystem">AbstractKiteSystem (class in gfeatpy.observation)</a>
 </li>
-        <li><a href="gfeatpy.html#gfeatpy.Planet.ae">ae (gfeatpy.Planet property)</a>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.DegreeAmplitudePlotter.add_item">add_item() (gfeatpy.plotting.DegreeAmplitudePlotter method)</a>
 </li>
-        <li><a href="gfeatpy.html#gfeatpy.observation.AlongTrack">AlongTrack (class in gfeatpy.observation)</a>
+        <li><a href="gfeatpy.html#gfeatpy.Planet.ae">ae (gfeatpy.Planet property)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gfeatpy.html#gfeatpy.observation.AlongTrack">AlongTrack (class in gfeatpy.observation)</a>
+</li>
         <li><a href="gfeatpy.html#gfeatpy.gravity.AOD1B">AOD1B (class in gfeatpy.gravity)</a>
 </li>
         <li><a href="gfeatpy.html#gfeatpy.utils.aop_dot">aop_dot() (in module gfeatpy.utils)</a>
@@ -321,6 +323,10 @@
           <li><a href="gfeatpy.html#gfeatpy.observation.AbstractKiteSystem.degree_variance">(gfeatpy.observation.AbstractKiteSystem method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.DegreeAmplitudePlotter">DegreeAmplitudePlotter (class in gfeatpy.plotting)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -379,8 +385,6 @@
 </li>
         <li><a href="gfeatpy.html#gfeatpy.observation.BaseObservation.get_wo_0">get_wo_0() (gfeatpy.observation.BaseObservation method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     gfeatpy
 
@@ -388,6 +392,8 @@
           <li><a href="gfeatpy.html#module-gfeatpy">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     gfeatpy.gravity
 
@@ -400,6 +406,13 @@
 
         <ul>
           <li><a href="gfeatpy.html#module-gfeatpy.observation">module</a>
+</li>
+        </ul></li>
+        <li>
+    gfeatpy.plotting
+
+        <ul>
+          <li><a href="gfeatpy.html#module-gfeatpy.plotting">module</a>
 </li>
         </ul></li>
         <li>
@@ -418,6 +431,10 @@
         <li><a href="gfeatpy.html#gfeatpy.gravity.GravityAnomaly">GravityAnomaly (class in gfeatpy.gravity)</a>
 </li>
         <li><a href="gfeatpy.html#gfeatpy.gravity.GravityField">GravityField (class in gfeatpy.gravity)</a>
+</li>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.ground_track">ground_track() (in module gfeatpy.plotting)</a>
+</li>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.GroundTrackExplorer">GroundTrackExplorer (class in gfeatpy.plotting)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -462,6 +479,8 @@
           <li><a href="gfeatpy.html#module-gfeatpy.gravity">gfeatpy.gravity</a>
 </li>
           <li><a href="gfeatpy.html#module-gfeatpy.observation">gfeatpy.observation</a>
+</li>
+          <li><a href="gfeatpy.html#module-gfeatpy.plotting">gfeatpy.plotting</a>
 </li>
           <li><a href="gfeatpy.html#module-gfeatpy.utils">gfeatpy.utils</a>
 </li>
@@ -516,6 +535,8 @@
 </li>
         <li><a href="gfeatpy.html#gfeatpy.gravity.SphericalHarmonicsCovariance.Pxx">Pxx (gfeatpy.gravity.SphericalHarmonicsCovariance property)</a>
 </li>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.pyramid">pyramid() (in module gfeatpy.plotting)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -552,6 +573,8 @@
           <li><a href="gfeatpy.html#gfeatpy.observation.AbstractKiteSystem.rms_per_coefficient_per_degree">(gfeatpy.observation.AbstractKiteSystem method)</a>
 </li>
         </ul></li>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.GroundTrackExplorer.run">run() (gfeatpy.plotting.GroundTrackExplorer method)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -574,6 +597,12 @@
         </ul></li>
         <li><a href="gfeatpy.html#gfeatpy.observation.AbstractKiteSystem.set_solution_time_window">set_solution_time_window() (gfeatpy.observation.AbstractKiteSystem method)</a>
 </li>
+        <li><a href="gfeatpy.html#gfeatpy.plotting.DegreeAmplitudePlotter.show">show() (gfeatpy.plotting.DegreeAmplitudePlotter method)</a>
+
+        <ul>
+          <li><a href="gfeatpy.html#gfeatpy.plotting.GroundTrackExplorer.show">(gfeatpy.plotting.GroundTrackExplorer method)</a>
+</li>
+        </ul></li>
         <li><a href="gfeatpy.html#gfeatpy.gravity.SphericalHarmonics.sigmas">sigmas (gfeatpy.gravity.SphericalHarmonics property)</a>
 </li>
         <li><a href="gfeatpy.html#gfeatpy.observation.BaseObservation.simulate_observations">simulate_observations() (gfeatpy.observation.BaseObservation method)</a>
@@ -596,6 +625,8 @@
           <li><a href="gfeatpy.html#gfeatpy.gravity.SphericalHarmonicsCovariance.synthesis">(gfeatpy.gravity.SphericalHarmonicsCovariance method)</a>
 </li>
           <li><a href="gfeatpy.html#gfeatpy.observation.AbstractKiteSystem.synthesis">(gfeatpy.observation.AbstractKiteSystem method)</a>
+</li>
+          <li><a href="gfeatpy.html#gfeatpy.plotting.synthesis">(in module gfeatpy.plotting)</a>
 </li>
         </ul></li>
         <li><a href="gfeatpy.html#gfeatpy.observation.AbstractKiteSystem.synthesis_average">synthesis_average() (gfeatpy.observation.AbstractKiteSystem method)</a>

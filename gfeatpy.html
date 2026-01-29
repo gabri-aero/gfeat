@@ -199,7 +199,7 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Planet object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#gravity-module">Gravity module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#observation-module">Observation module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#plotting-module">Plotting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gfeatpy.plotting">Plotting module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-gfeatpy.utils">Utils module</a></li>
 </ul>
 </li>
@@ -315,8 +315,7 @@
 <section id="gravity-module">
 <h1>Gravity module<a class="headerlink" href="#gravity-module" title="Link to this heading">¶</a></h1>
 <p>The gravity module provides different tools to handle gravity field data.</p>
-<p id="module-gfeatpy.gravity">Gravity submodule</p>
-<dl class="py class">
+<dl class="py class" id="module-gfeatpy.gravity">
 <dt class="sig sig-object py" id="gfeatpy.gravity.AOD1B">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.gravity.</span></span><span class="sig-name descname"><span class="pre">AOD1B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gfeatpy._core.gravity.AOD1B</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gfeatpy.gravity.AOD1B" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
@@ -399,7 +398,13 @@ different gravity field functionals. For this purpose, it contains a function
 <p>It is employed internally in both the Global Spherical Harmonics Synthesis
 and the computation of degree variances. This allows for code modularity
 and simplifies the implementation of the different functionals.</p>
-</dd></dl>
+<div class="graphviz"><img src="_images/inheritance-c9062672ec4b97e96c1ca7f0f2b52621bb63df58.png" alt="Inheritance diagram of gfeatpy.gravity.GeoidHeight, gfeatpy.gravity.GravityAnomaly, gfeatpy.gravity.EquivalentWaterHeight" usemap="#inheritanceb40542cb4f" class="inheritance graphviz" /></div>
+<map id="inheritanceb40542cb4f" name="inheritanceb40542cb4f">
+<area shape="rect" id="node1" href="#gfeatpy.gravity.BaseFunctional" target="_top" title="BaseFunctional is an abstract class that serves as parent class to implement " alt="" coords="5,55,127,80"/>
+<area shape="rect" id="node2" href="#gfeatpy.gravity.EquivalentWaterHeight" target="_top" title="EquivalentWaterHeight class defines the degree common terms for computation of EWH " alt="" coords="175,5,347,31"/>
+<area shape="rect" id="node3" href="#gfeatpy.gravity.GeoidHeight" target="_top" title="GeoidHeight class defines the degree common terms for computation of geoid height." alt="" coords="209,55,312,80"/>
+<area shape="rect" id="node4" href="#gfeatpy.gravity.GravityAnomaly" target="_top" title="GravityAnomaly class defines the degree common terms for computation of gravity anomalies" alt="" coords="197,104,325,129"/>
+</map></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="gfeatpy.gravity.DateTime">
@@ -743,31 +748,18 @@ the input functional on the lon/lat grid.</p></li>
 <h1>Observation module<a class="headerlink" href="#observation-module" title="Link to this heading">¶</a></h1>
 <p>The observation module handles the computation of the spectral observations. For this purpose, different functionalities
 are defined in abstract objects and inherited towards the actual usable observation classes.</p>
-digraph inheritance8af429003f {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;AbstractKiteSystem&quot; [URL=&quot;#gfeatpy.observation.AbstractKiteSystem&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;AbstractKiteSystem class defines the base object that handles the block-kite structure &quot;];
-  &quot;AlongTrack&quot; [URL=&quot;#gfeatpy.observation.AlongTrack&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class defines the position displacement observation in the along-track&quot;];
-  &quot;BaseObservation&quot; -&gt; &quot;AlongTrack&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;BaseObservation&quot; [URL=&quot;#gfeatpy.observation.BaseObservation&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;BaseObservation class defines the base object for any observation along a circular orbit.&quot;];
-  &quot;AbstractKiteSystem&quot; -&gt; &quot;BaseObservation&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Constellation&quot; [URL=&quot;#gfeatpy.observation.Constellation&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class wraps the :attr:`~gfeatpy.observation.MultiObservation` class to handle&quot;];
-  &quot;MultiObservation&quot; -&gt; &quot;Constellation&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;CrossTrack&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;This class defines the position displacement observation in the cross-track&quot;];
-  &quot;BaseObservation&quot; -&gt; &quot;CrossTrack&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;GPS&quot; [URL=&quot;#gfeatpy.observation.GPS&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;];
-  &quot;MultiObservation&quot; -&gt; &quot;GPS&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;MultiObservation&quot; [URL=&quot;#gfeatpy.observation.MultiObservation&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class takes a list of attr:`~gfeatpy.observation.BaseObservation` objects to compute &quot;];
-  &quot;AbstractKiteSystem&quot; -&gt; &quot;MultiObservation&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Potential&quot; [URL=&quot;#gfeatpy.observation.Potential&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class defines the perturbing potential observation for a circular orbit.&quot;];
-  &quot;BaseObservation&quot; -&gt; &quot;Potential&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Radial&quot; [URL=&quot;#gfeatpy.observation.Radial&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;This class defines the position displacement observation in the radial&quot;];
-  &quot;BaseObservation&quot; -&gt; &quot;Radial&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Range&quot; [URL=&quot;#gfeatpy.observation.Range&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;];
-  &quot;BaseObservation&quot; -&gt; &quot;Range&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>The observations require the definition of different orbital elements which are relative to the Earth frame as depicted below.</p>
+<div class="graphviz"><img src="_images/inheritance-a5376ea8089c471c4ad02ca17bd7664fee8b483a.png" alt="Inheritance diagram of gfeatpy.observation.AbstractKiteSystem, gfeatpy.observation.BaseObservation, gfeatpy.observation.MultiObservation, gfeatpy.observation.Radial, gfeatpy.observation.CrossTrack, gfeatpy.observation.AlongTrack, gfeatpy.observation.Potential, gfeatpy.observation.Range, gfeatpy.observation.Constellation, gfeatpy.observation.GPS" usemap="#inheritance8af429003f" class="inheritance graphviz" /></div>
+<map id="inheritance8af429003f" name="inheritance8af429003f">
+<area shape="rect" id="node1" href="#gfeatpy.observation.AbstractKiteSystem" target="_top" title="AbstractKiteSystem class defines the base object that handles the block&#45;kite structure " alt="" coords="5,203,156,228"/>
+<area shape="rect" id="node3" href="#gfeatpy.observation.BaseObservation" target="_top" title="BaseObservation class defines the base object for any observation along a circular orbit." alt="" coords="205,129,338,155"/>
+<area shape="rect" id="node5" href="#gfeatpy.observation.MultiObservation" target="_top" title="This class takes a list of attr:`~gfeatpy.observation.BaseObservation` objects to compute " alt="" coords="204,252,339,277"/>
+<area shape="rect" id="node2" href="#gfeatpy.observation.AlongTrack" target="_top" title="This class defines the position displacement observation in the along&#45;track" alt="" coords="394,5,487,31"/>
+<area shape="rect" id="node8" href="#gfeatpy.observation.Potential" target="_top" title="This class defines the perturbing potential observation for a circular orbit." alt="" coords="401,104,481,129"/>
+<area shape="rect" id="node9" href="#gfeatpy.observation.Radial" target="_top" title="This class defines the position displacement observation in the radial" alt="" coords="405,153,477,179"/>
+<area shape="rect" id="node10" href="#gfeatpy.observation.Range" target="_top" title="Range" alt="" coords="405,203,477,228"/>
+<area shape="rect" id="node4" href="#gfeatpy.observation.Constellation" target="_top" title="This class wraps the :attr:`~gfeatpy.observation.MultiObservation` class to handle" alt="" coords="387,252,495,277"/>
+<area shape="rect" id="node7" href="#gfeatpy.observation.GPS" target="_top" title="GPS" alt="" coords="405,301,477,327"/>
+</map><p>The observations require the definition of different orbital elements which are relative to the Earth frame as depicted below.</p>
 <a class="reference internal image-reference" href="_images/orbital-elements.jpg"><img alt="Orbital elements figure" src="_images/orbital-elements.jpg" style="width: 400px;" />
 </a>
 <dl class="py class" id="module-gfeatpy.observation">
@@ -1291,8 +1283,136 @@ This function accounts for this propagation internally.</p>
 </dd></dl>
 
 </section>
-<section id="plotting-module">
-<h1>Plotting module<a class="headerlink" href="#plotting-module" title="Link to this heading">¶</a></h1>
+<section id="module-gfeatpy.plotting">
+<span id="plotting-module"></span><h1>Plotting module<a class="headerlink" href="#module-gfeatpy.plotting" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.plotting.DegreeAmplitudePlotter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.plotting.</span></span><span class="sig-name descname"><span class="pre">DegreeAmplitudePlotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#DegreeAmplitudePlotter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.DegreeAmplitudePlotter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to plot the RMS per coefficient per degree spectrum</p>
+<p>It allows for adding as many objects as needed with a lot
+of flexibility for formatting</p>
+<p>Constructor for DegreeAmplitudePlotter class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>figsize</strong> (<em>tuple</em>) – matplotlib figure size</p></li>
+<li><p><strong>functional</strong> (<a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><em>BaseFunctional</em></a>) – BaseFunctional object to scale be applied to the RMS values</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.plotting.DegreeAmplitudePlotter.add_item">
+<span class="sig-name descname"><span class="pre">add_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#DegreeAmplitudePlotter.add_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.DegreeAmplitudePlotter.add_item" title="Link to this definition">¶</a></dt>
+<dd><p>Add an item to the degree amplitude plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object</strong> – Any object containing SH coefficients or errors</p></li>
+<li><p><strong>args</strong> – Additional positional arguments to be passed to ax.semilogy</p></li>
+<li><p><strong>show_error</strong> – A boolean to indicate whether to plot the error (True) or the signal (False). If None, the signal is plotted by default.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments to be passed to ax.semilogy</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.plotting.DegreeAmplitudePlotter.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#DegreeAmplitudePlotter.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.DegreeAmplitudePlotter.show" title="Link to this definition">¶</a></dt>
+<dd><p>Wrapper for show method</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gfeatpy.plotting.GroundTrackExplorer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gfeatpy.plotting.</span></span><span class="sig-name descname"><span class="pre">GroundTrackExplorer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#GroundTrackExplorer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.GroundTrackExplorer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to explore repeating ground tracks for the global planet object as defined in gfeatpy.planet.
+It is essential for orbit selection since Nr and Nd are input arguments for analytical observations
+within gfeatpy.observation module.</p>
+<p>Constructor for GroundTrackExplorer class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h_min</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Minimum orbit height [m]</p></li>
+<li><p><strong>h_max</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Maximum orbit height [m]</p></li>
+<li><p><strong>Nd_max</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Maximum number of nodal days to consider</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.plotting.GroundTrackExplorer.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#GroundTrackExplorer.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.GroundTrackExplorer.run" title="Link to this definition">¶</a></dt>
+<dd><p>Explore repeating ground tracks within explorer bounds for given inclination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>I</strong> – Inclination [rad]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gfeatpy.plotting.GroundTrackExplorer.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#GroundTrackExplorer.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.GroundTrackExplorer.show" title="Link to this definition">¶</a></dt>
+<dd><p>Wrapper for show method</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.plotting.ground_track">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.plotting.</span></span><span class="sig-name descname"><span class="pre">ground_track</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Nr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">we_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wo_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_per_rev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#ground_track"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.ground_track" title="Link to this definition">¶</a></dt>
+<dd><p>Function to plot any repeating ground track. Generally to be used along with <a class="reference internal" href="#gfeatpy.plotting.synthesis" title="gfeatpy.plotting.synthesis"><code class="xref py py-func docutils literal notranslate"><span class="pre">gfeatpy.plotting.synthesis()</span></code></a> to observe ground-track correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Nr</strong> – Number of revolutions</p></li>
+<li><p><strong>Nd</strong> – Nodal days</p></li>
+<li><p><strong>I</strong> – Inclination [rad]</p></li>
+<li><p><strong>we_0</strong> – Initial Earth-fixed longitude of ascending node [rad]</p></li>
+<li><p><strong>wo_0</strong> – Initial Earth-fixed argument of latitude [rad]</p></li>
+<li><p><strong>samples_per_rev</strong> – Samples per revolution (higher = smoother ground-track)</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments to be passed to plt.scatter</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.plotting.pyramid">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.plotting.</span></span><span class="sig-name descname"><span class="pre">pyramid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jet'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#pyramid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.pyramid" title="Link to this definition">¶</a></dt>
+<dd><p>Function to plot the SH coefficients in a pyramid format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_object</strong> – Any object containing SH coefficients or errors</p></li>
+<li><p><strong>colormap</strong> – Colormap to use for plotting</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gfeatpy.plotting.synthesis">
+<span class="sig-prename descclassname"><span class="pre">gfeatpy.plotting.</span></span><span class="sig-name descname"><span class="pre">synthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functional</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'seismic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gfeatpy/plotting.html#synthesis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gfeatpy.plotting.synthesis" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the global SH synthesis on an Earth map.
+(To DO: add option to remove Earth map background)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_object</strong> – Any object containing SH coefficients or errors</p></li>
+<li><p><strong>n_lon</strong> (<em>int</em>) – Number of longitude points</p></li>
+<li><p><strong>n_lat</strong> (<em>int</em>) – Number of latitude points</p></li>
+<li><p><strong>functional</strong> (<a class="reference internal" href="#gfeatpy.gravity.BaseFunctional" title="gfeatpy.gravity.BaseFunctional"><em>BaseFunctional</em></a>) – Any synthesis functional: GravityAnomaly, EquivalentWaterHeight, GeoidHeight</p></li>
+<li><p><strong>colormap</strong> (<em>str</em>) – Colormap to use for plotting</p></li>
+<li><p><strong>z_max</strong> (<em>float</em>) – Cutting value for the color scale</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-gfeatpy.utils">
 <span id="utils-module"></span><h1>Utils module<a class="headerlink" href="#module-gfeatpy.utils" title="Link to this heading">¶</a></h1>
@@ -1542,7 +1662,22 @@ This function accounts for this propagation internally.</p>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#plotting-module">Plotting module</a></li>
+<li><a class="reference internal" href="#module-gfeatpy.plotting">Plotting module</a><ul>
+<li><a class="reference internal" href="#gfeatpy.plotting.DegreeAmplitudePlotter"><code class="docutils literal notranslate"><span class="pre">DegreeAmplitudePlotter</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.plotting.DegreeAmplitudePlotter.add_item"><code class="docutils literal notranslate"><span class="pre">DegreeAmplitudePlotter.add_item()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.plotting.DegreeAmplitudePlotter.show"><code class="docutils literal notranslate"><span class="pre">DegreeAmplitudePlotter.show()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.plotting.GroundTrackExplorer"><code class="docutils literal notranslate"><span class="pre">GroundTrackExplorer</span></code></a><ul>
+<li><a class="reference internal" href="#gfeatpy.plotting.GroundTrackExplorer.run"><code class="docutils literal notranslate"><span class="pre">GroundTrackExplorer.run()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.plotting.GroundTrackExplorer.show"><code class="docutils literal notranslate"><span class="pre">GroundTrackExplorer.show()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gfeatpy.plotting.ground_track"><code class="docutils literal notranslate"><span class="pre">ground_track()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.plotting.pyramid"><code class="docutils literal notranslate"><span class="pre">pyramid()</span></code></a></li>
+<li><a class="reference internal" href="#gfeatpy.plotting.synthesis"><code class="docutils literal notranslate"><span class="pre">synthesis()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-gfeatpy.utils">Utils module</a><ul>
 <li><a class="reference internal" href="#gfeatpy.utils.R1"><code class="docutils literal notranslate"><span class="pre">R1()</span></code></a></li>
 <li><a class="reference internal" href="#gfeatpy.utils.R2"><code class="docutils literal notranslate"><span class="pre">R2()</span></code></a></li>
