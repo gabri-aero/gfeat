@@ -27,7 +27,7 @@ message(STATUS "Files found: ${SOURCES}")
 set(CPP_TARGET gfeat)
 add_library(${CPP_TARGET} SHARED ${SOURCES})
 set_target_properties(${CPP_TARGET} PROPERTIES LINKER_LANGUAGE CXX)
-add_compile_options(-march=native -ffast-math)  # -O3 might be unsuitable for debugging
+add_compile_options(-O3 -ffast-math)  # -O3 might be unsuitable for debugging
 target_include_directories(${CPP_TARGET} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/external/eigen)
 
 # Setup external libraries
@@ -60,7 +60,7 @@ python_add_library(_core MODULE gfeatpy/main.cpp WITH_SOABI)
 
 # Settings
 target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
-target_compile_options(_core PRIVATE -O3 -march=native -ffast-math -fopenmp)
+target_compile_options(_core PRIVATE -O3 -ffast-math)
 set_target_properties(_core PROPERTIES
   INSTALL_RPATH "$ORIGIN"
   BUILD_WITH_INSTALL_RPATH TRUE
@@ -68,11 +68,7 @@ set_target_properties(_core PROPERTIES
 
 # Link 
 target_include_directories(_core PRIVATE ${PROJECT_ROOT})
-target_link_libraries(_core PRIVATE pybind11::headers)
-
-# OpenMP setup
-find_package(OpenMP REQUIRED)
-target_link_libraries(_core PUBLIC OpenMP::OpenMP_CXX)
+target_link_libraries(_core PRIVATE ${CPP_TARGET} pybind11::headers)
 
 # Link external directories
 file(GLOB EXTERNAL_DIRS LIST_DIRECTORIES true "${PROJECT_ROOT}/external/*")
