@@ -63,6 +63,9 @@ set(PYTHON_SITE_PACKAGES_DIR ${Python3_SITE_PACKAGES})
 # Define the Python library generated from C++
 python_add_library(_core MODULE gfeatpy/main.cpp WITH_SOABI)
 
+# Link _core to C++ library
+target_link_libraries(_core PRIVATE ${CPP_TARGET} pybind11::headers)
+
 # Settings
 target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
 target_compile_options(_core PRIVATE -O3 -ffast-math)
@@ -71,11 +74,14 @@ if(APPLE) # macOS specific settings
         INSTALL_RPATH "@loader_path"
         BUILD_WITH_INSTALL_RPATH TRUE
     )
+    add_dependencies(_core ${CPP_TARGET})
+    add_custom_command(TARGET _core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${CPP_TARGET}> $<TARGET_FILE_DIR:_core>
+    )
 endif()
 
 # Link 
 target_include_directories(_core PRIVATE ${PROJECT_ROOT})
-target_link_libraries(_core PRIVATE ${CPP_TARGET} pybind11::headers)
 
 # Link external directories
 file(GLOB EXTERNAL_DIRS LIST_DIRECTORIES true "${PROJECT_ROOT}/external/*")
