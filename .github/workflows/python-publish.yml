@@ -10,7 +10,10 @@ permissions:
 
 jobs:
   release-build:
-    runs-on: [ubuntu-latest, windows-latest, macos-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -25,43 +28,47 @@ jobs:
       - name: Show version from targeting tag
         run: echo "VERSION=${{ github.event.release.tag_name || '0.0.0-test' }}" >> $GITHUB_ENV
           
-      - name: Install build dependencies
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          python -m pip install scikit-build-core pybind11 pybind11-stubgen cibuildwheel
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3.3
 
-      - name: Build distributions
+      - name: Build sdist
+        if: matrix.os == 'ubuntu-latest'
         run: |
-          python -m cibuildwheel --output-dir wheelhouse
+          python -m pip install --upgrade pip build twine
+          python -m build --sdist
+          twine check dist/*
 
       - name: Upload wheel artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
-          name: wheel
-          path: wheelhouse/*.whl
+          name: dist-${{ matrix.os }}
+          path: |
+            dist/*.tar.gz
+            wheelhouse/*.whl
 
   pypi-publish:
+    name: Publish to PyPI
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
     needs:
       - release-build
     permissions:
       id-token: write
-
-    # Dedicated environments with protections for publishing are strongly recommended.
-    # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
+      contents: read
+  
     environment:
       name: pypi
-      url: https://pypi.org/project/gfeatpy/${{ github.event.release.name }}
-
+      url: https://pypi.org/
+  
     steps:
-      - name: Retrieve wheels
-        uses: actions/download-artifact@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v6
         with:
-          name: wheel
-          path: wheelhouse/
-
-      - name: Publish wheel artifacts to PyPI
+          pattern: dist-*
+          merge-multiple: true
+          path: dist
+  
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: wheelhouse/
+          packages-dir: dist
