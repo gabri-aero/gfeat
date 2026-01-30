@@ -73,6 +73,7 @@ if(APPLE) # macOS specific settings
     set_target_properties(_core PROPERTIES
         INSTALL_RPATH "@loader_path"
         BUILD_WITH_INSTALL_RPATH TRUE
+        OUTPUT_NAME "libgfeat"
     )
     add_dependencies(_core ${CPP_TARGET})
     add_custom_command(TARGET _core POST_BUILD
