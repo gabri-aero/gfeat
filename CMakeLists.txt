@@ -26,6 +26,11 @@ message(STATUS "Files found: ${SOURCES}")
 # Create C++ library
 set(CPP_TARGET gfeat)
 add_library(${CPP_TARGET} SHARED ${SOURCES})
+if(APPLE)
+    set_target_properties(${CPP_TARGET} PROPERTIES
+        INSTALL_NAME_DIR "@rpath"
+    )
+endif()
 set_target_properties(${CPP_TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 add_compile_options(-O3 -ffast-math)  # -O3 might be unsuitable for debugging
 target_include_directories(${CPP_TARGET} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/external/eigen)
@@ -61,10 +66,12 @@ python_add_library(_core MODULE gfeatpy/main.cpp WITH_SOABI)
 # Settings
 target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
 target_compile_options(_core PRIVATE -O3 -ffast-math)
-set_target_properties(_core PROPERTIES
-  INSTALL_RPATH "$ORIGIN"
-  BUILD_WITH_INSTALL_RPATH TRUE
-)
+if(APPLE) # macOS specific settings
+    set_target_properties(_core PROPERTIES
+        INSTALL_RPATH "@loader_path"
+        BUILD_WITH_INSTALL_RPATH TRUE
+    )
+endif()
 
 # Link 
 target_include_directories(_core PRIVATE ${PROJECT_ROOT})
