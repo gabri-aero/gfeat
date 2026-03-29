@@ -150,6 +150,36 @@ void init_observation(py::module &m) {
                 Kaula's constant for the empirical Kaula's rule"
 
             )doc")
+        .def("set_Clm_constraint", &AbstractKiteSystem::set_Clm_constraint,
+             py::arg("l"), py::arg("m"), py::arg("sigma"),
+             R"doc(
+            This function sets a constraint on the standard deviation of a specific Clm coefficient.
+
+            Parameters
+            -----------
+            l : int
+                Degree of the spherical harmonic.
+            m : int
+                Order of the spherical harmonic.
+            sigma : double
+                Standard deviation of the Clm coefficient.
+
+            )doc")
+        .def("set_Slm_constraint", &AbstractKiteSystem::set_Slm_constraint,
+             py::arg("l"), py::arg("m"), py::arg("sigma"),
+             R"doc(
+            This function sets a constraint on the standard deviation of a specific Slm coefficient.
+
+            Parameters
+            -----------
+            l : int
+                Degree of the spherical harmonic.
+            m : int
+                Order of the spherical harmonic.
+            sigma : double
+                Standard deviation of the Slm coefficient.
+
+            )doc")
         .def("set_solution_time_window",
              &AbstractKiteSystem::set_solution_time_window,
              py::arg("time_window"),
