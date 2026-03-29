@@ -41,7 +41,7 @@ public:
             } else if (row[0] == "gfc" || row[0] == "gfct") {
                 l = std::stoi(row[1]);
                 m = std::stoi(row[2]);
-                if (l <= this->l_max and m <= this->l_max) {
+                if (l <= this->l_max && m <= this->l_max) {
                     this->Clm(l, m) = std::stod(row[3]);
                     this->sigma_Clm(l, m) = std::stod(row[5]);
                     if (m > 0) {

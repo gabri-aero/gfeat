@@ -55,7 +55,7 @@ public:
                 break;
             }
             // Read and assign values
-            while (*p and col < n) {
+            while (*p && col < n) {
                 // Only fill lower triangular part
                 value = std::strtod(p, &p);
                 N.coeffRef(col++, row) = value;
