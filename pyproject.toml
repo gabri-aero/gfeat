@@ -7,11 +7,11 @@ requires = [
 build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
-cmake.args = ["-DBUILD_GFEATPY=ON", "-DPROJECT_VERSION=0.1.1"]
+cmake.args = ["-DBUILD_GFEATPY=ON", "-DPROJECT_VERSION=0.1.4"]
 
 [project]
 name = "gfeatpy"
-version = "0.1.1"
+version = "0.1.4"
 description="A Python wrapper for a C++ gravity field error analysis toolkit. "
 readme = { file = "README.md", content-type = "text/markdown" }
 license = "GPL-3.0-or-later"
