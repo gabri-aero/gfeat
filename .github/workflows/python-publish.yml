@@ -67,6 +67,11 @@ jobs:
           pattern: dist-*
           merge-multiple: true
           path: dist
+
+      - name: Flatten directory structure
+        run: |
+          ls -R
+          cd dist && mv wheelhouse/* dist/* . && rm -rf wheelhouse dist
   
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
