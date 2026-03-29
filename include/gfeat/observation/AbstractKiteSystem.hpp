@@ -171,6 +171,18 @@ public:
         }
     }
 
+    void set_Clm_constraint(int l, int m, double sigma) {
+        int m0 = std::min(m % Nr, Nr - m % Nr);
+        int clm_i = clm_idx.at(m0)[{l, m}];
+        Pcc_inv.at(m0).diagonal()(clm_i) = 1 / pow(sigma, 2);
+    }
+
+    void set_Slm_constraint(int l, int m, double sigma) {
+        int m0 = std::min(m % Nr, Nr - m % Nr);
+        int slm_i = slm_idx.at(m0)[{l, m}];
+        Pcc_inv.at(m0).diagonal()(slm_i) = 1 / pow(sigma, 2);
+    }
+
     virtual void compute_normal_matrix() = 0;
 
     void block_solve() {
