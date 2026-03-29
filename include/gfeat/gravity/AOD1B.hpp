@@ -133,7 +133,7 @@ public:
                 sh.Clm(l, m) = Clm;
                 if (m > 0)
                     sh.Slm(l, m) = Slm;
-                if (l == l_max and m == l_max) { // end of data set reached
+                if (l == l_max && m == l_max) { // end of data set reached
                     read_dataset = false;
                     sh_models[{date, type}] = sh;
                 }

@@ -3,99 +3,98 @@ project(gfeatpy VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Set the root source directory
+# Root directories
 set(PROJECT_ROOT ${CMAKE_SOURCE_DIR})
 
-# Define data directory path
+# Data directory
 set(DATA_DIR "${PROJECT_ROOT}/data")
 add_definitions(-DDATA_DIR="${DATA_DIR}")
 
-# Check if C++ tests should be built
+# Check if building Python wrapper or C++ tests
 if(BUILD_GFEATPY)
-message(STATUS "Building python library")
-set(BUILD_CPP_TESTS OFF)
+    message(STATUS "Building python library")
+    set(BUILD_CPP_TESTS OFF)
 else()
-message(STATUS "Building C++ tests")
-set(BUILD_CPP_TESTS ON)
+    message(STATUS "Building C++ tests")
+    set(BUILD_CPP_TESTS ON)
 endif()
 
-# Retrieve all source files
-file(GLOB_RECURSE SOURCES "include/*.hpp")
-message(STATUS "Files found: ${SOURCES}")
-# Create C++ library
+# ---------------------------
+# Header-only gfeat library
+# ---------------------------
 set(CPP_TARGET gfeat)
-add_library(${CPP_TARGET} SHARED ${SOURCES})
-if(APPLE)
-    set_target_properties(${CPP_TARGET} PROPERTIES
-        INSTALL_NAME_DIR "@rpath"
-    )
+file(GLOB_RECURSE HEADER_FILES "${PROJECT_ROOT}/include/gfeat/*.hpp")
+add_library(${CPP_TARGET} INTERFACE gfeat ${HEADER_FILES})
+
+# Compile options
+if(MSVC)
+    target_compile_definitions(${CPP_TARGET} INTERFACE _USE_MATH_DEFINES)
+    target_compile_options(${CPP_TARGET} INTERFACE /permissive- /O2 /fp:fast)
+else()
+    target_compile_options(${CPP_TARGET} INTERFACE -O3 -ffast-math)
 endif()
-set_target_properties(${CPP_TARGET} PROPERTIES LINKER_LANGUAGE CXX)
-add_compile_options(-O3 -ffast-math)  # -O3 might be unsuitable for debugging
-target_include_directories(${CPP_TARGET} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/external/eigen)
 
-# Setup external libraries
-
+# ---------------------------
+# C++ tests
+# ---------------------------
 if(BUILD_CPP_TESTS)
-enable_testing()
-# Google Test
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
-FetchContent_MakeAvailable(googletest)
-target_link_libraries(${CPP_TARGET} PRIVATE GTest::gtest_main)
-include(GoogleTest)
-# Create C++ tests
-add_subdirectory(tests)
+    enable_testing()
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    )
+    FetchContent_MakeAvailable(googletest)
+    include(GoogleTest)
+    add_subdirectory(tests)
 endif()
 
-# Build python wrapper _core
+# ---------------------------
+# Python wrapper _core
+# ---------------------------
 if(BUILD_GFEATPY)
-find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
-set(PYBIND11_FINDPYTHON ON)
-find_package(pybind11 CONFIG REQUIRED)
-set(PYTHON_SITE_PACKAGES_DIR ${Python3_SITE_PACKAGES})
+    find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+    set(PYBIND11_FINDPYTHON ON)
+    find_package(pybind11 CONFIG REQUIRED)
+    set(PYTHON_SITE_PACKAGES_DIR ${Python3_SITE_PACKAGES})
 
-# Define the Python library generated from C++
-python_add_library(_core MODULE gfeatpy/main.cpp WITH_SOABI)
+    # Define the Python library generated from C++
+    python_add_library(_core MODULE gfeatpy/main.cpp WITH_SOABI)
 
-# Link _core to C++ library
-target_link_libraries(_core PRIVATE ${CPP_TARGET} pybind11::headers)
-
-# Settings
-target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
-target_compile_options(_core PRIVATE -O3 -ffast-math)
-if(APPLE) # macOS specific settings
-    set_target_properties(_core PROPERTIES
-        INSTALL_RPATH "@loader_path"
-        BUILD_WITH_INSTALL_RPATH TRUE
-        OUTPUT_NAME "libgfeat"
-    )
+    # Add dependency on the header-only library
     add_dependencies(_core ${CPP_TARGET})
-    add_custom_command(TARGET _core POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${CPP_TARGET}> $<TARGET_FILE_DIR:_core>
+
+    # Link the header-only library to the Python module
+    target_link_libraries(_core PRIVATE ${CPP_TARGET})
+
+    # Settings
+    target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
+    set_target_properties(_core PROPERTIES
+    INSTALL_RPATH "$ORIGIN"
+    BUILD_WITH_INSTALL_RPATH TRUE
     )
-endif()
 
-# Link 
-target_include_directories(_core PRIVATE ${PROJECT_ROOT})
+    # Link root directory
+    target_include_directories(_core PRIVATE ${PROJECT_ROOT})
 
-# Link external directories
-file(GLOB EXTERNAL_DIRS LIST_DIRECTORIES true "${PROJECT_ROOT}/external/*")
-foreach(DIR ${EXTERNAL_DIRS})
-    if(IS_DIRECTORY ${DIR})
-        message(STATUS "Adding external directory: ${DIR}")
-        target_include_directories(_core PRIVATE ${DIR})
-    endif()
-endforeach()
+    # Link pybind11 headers
+    target_link_libraries(_core PRIVATE pybind11::headers)
 
-# Install targets
-install(TARGETS _core DESTINATION gfeatpy)
-file(GLOB PYTHON_FILES "${PROJECT_ROOT}/py/*.py")
-install(FILES ${PYTHON_FILES} DESTINATION gfeatpy)
+    # Link external directories
+    file(GLOB EXTERNAL_DIRS LIST_DIRECTORIES true "${PROJECT_ROOT}/external/*")
+    foreach(DIR ${EXTERNAL_DIRS})
+        if(IS_DIRECTORY ${DIR})
+            message(STATUS "Adding external directory: ${DIR}")
+            target_include_directories(_core PRIVATE ${DIR})
+        endif()
+    endforeach()
+
+    # Install targets
+    install(TARGETS _core DESTINATION gfeatpy)
+    file(GLOB PYTHON_FILES "${PROJECT_ROOT}/gfeatpy/*.py")
+    install(FILES ${PYTHON_FILES} DESTINATION gfeatpy)
 
 endif()

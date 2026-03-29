@@ -91,7 +91,7 @@ public:
             for (int k = -this->l_max; k <= this->l_max; k++) {
                 for (int m : m_block) { // Loop over order of that block
                     kNr_mNd = std::abs(k * this->Nr - m * this->Nd);
-                    if (kNr_mNd != 0 and kNr_mNd != this->Nr and
+                    if (kNr_mNd != 0 && kNr_mNd != this->Nr &&
                         l_min(m, k) <=
                             this->l_max) { // Check non-resonant solution and
                                            // limiting frequencies
