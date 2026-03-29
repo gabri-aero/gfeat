@@ -1,9 +1,6 @@
 #ifndef _SPHERICAL_HARMONICS_COVARIANCE_HPP_
 #define _SPHERICAL_HARMONICS_COVARIANCE_HPP_
 
-#define EIGEN_HAS_OPENMP // Force Eigen to see OpenMP
-#include <omp.h>
-
 #include "../utils/Logger.hpp"
 #include "../utils/Sinex.hpp"
 #include "Functionals.hpp"
