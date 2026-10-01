@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "When using GFEAT, please cite the following paper."
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Valles-Valverde"
+      given-names: "Gabriel"
+    - family-names: "Schrama"
+      given-names: "Ernst J. O."
+    - family-names: "Teixeira da Encarnação"
+      given-names: "João"
+  title: "Analytical gravity field error analysis of multiple pair constellations"
+  journal: "Advances in Space Research"
+  volume: 78
+  start: 9389
+  end: 9408
+  year: 2026
+  doi: "10.1016/j.asr.2026.08.045"
